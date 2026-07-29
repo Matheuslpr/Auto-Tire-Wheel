@@ -1,3 +1,22 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: AutoTireWheel
+
+  datasource:
+    url: jdbc:postgresql://localhost:5431/AutoTireWheel
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
