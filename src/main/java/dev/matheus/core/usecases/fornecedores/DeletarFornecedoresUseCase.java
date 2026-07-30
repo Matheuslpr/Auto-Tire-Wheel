@@ -2,6 +2,7 @@ package dev.matheus.core.usecases.fornecedores;
 
 import dev.matheus.core.entities.Fornecedores;
 
-public interface AtualizaFornecedoresUseCase {
+public interface DeletarFornecedoresUseCase {
     Fornecedores execute(Fornecedores fornecedores);
+
 }
