@@ -1,0 +1,20 @@
+CREATE TABLE fornecedores(
+    id BIGSERIAL PRIMARY KEY,
+    razao_social VARCHAR(150) NOT NULL,
+    nome_fantasia VARCHAR(150),
+    tipo_documento VARCHAR(4) NOT NULL,
+    numero_documento VARCHAR(20) NOT NULL UNIQUE,
+    inscricao_estadual VARCHAR(30),
+    nome_contato VARCHAR(150),
+    email VARCHAR(150),
+    telefone VARCHAR(30),
+    logradouro VARCHAR(150),
+    numero VARCHAR(20),
+    bairro VARCHAR(100),
+    cidade VARCHAR(100),
+    estado VARCHAR(2),
+    cep VARCHAR(20),
+    data_cadastro TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    data_atualizacao TIMESTAMP,
+    CHECK (tipo_documento IN ('CPF', 'CNPJ'))
+);
