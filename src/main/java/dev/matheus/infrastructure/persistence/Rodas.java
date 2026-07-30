@@ -26,7 +26,7 @@ public class Rodas {
 
     private Integer furos;
 
-    @Column(name = "diamentro_furacao_mm")
+    @Column(name = "diametro_furacao_mm")
     private BigDecimal diametroFuracaoMm;
 
     @Column(name = "offset_et_mm")
