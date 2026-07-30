@@ -7,7 +7,8 @@ import java.time.LocalDateTime;
 public record Clientes(
         Long id,
         String nome,
-        TipoDocumento documento,
+        TipoDocumento tipoDocumento,
+        String numeroDocumento,
         String email,
         String telefone,
         String logradouro,
@@ -18,6 +19,7 @@ public record Clientes(
         String cep,
         LocalDateTime dataCadastro,
         LocalDateTime dataAtualizacao
+
 
 ) {
 }
