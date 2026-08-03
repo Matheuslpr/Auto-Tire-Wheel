@@ -6,14 +6,18 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "clientes")
-public class Clientes {
+@Table(name = "fornecedores")
+public class FornecedoresEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nome;
+    @Column(name = "razao_social")
+    private String razaoSocial;
+
+    @Column(name = "nome_fantasia")
+    private String nomeFantasia;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_documento")
@@ -21,6 +25,12 @@ public class Clientes {
 
     @Column(name = "numero_documento")
     private String numeroDocumento;
+
+    @Column(name = "inscricao_estadual")
+    private String inscricaoEstadual;
+
+    @Column(name = "nome_contato")
+    private String nomeContato;
 
     private String email;
     private String telefone;
@@ -47,7 +57,7 @@ public class Clientes {
         dataAtualizacao = LocalDateTime.now();
     }
 
-    //gets and sets
+    // gets and sets
 
     public Long getId() {
         return id;
@@ -57,12 +67,20 @@ public class Clientes {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getRazaoSocial() {
+        return razaoSocial;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setRazaoSocial(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
+    }
+
+    public String getNomeFantasia() {
+        return nomeFantasia;
+    }
+
+    public void setNomeFantasia(String nomeFantasia) {
+        this.nomeFantasia = nomeFantasia;
     }
 
     public TipoDocumento getTipoDocumento() {
@@ -79,6 +97,22 @@ public class Clientes {
 
     public void setNumeroDocumento(String numeroDocumento) {
         this.numeroDocumento = numeroDocumento;
+    }
+
+    public String getInscricaoEstadual() {
+        return inscricaoEstadual;
+    }
+
+    public void setInscricaoEstadual(String inscricaoEstadual) {
+        this.inscricaoEstadual = inscricaoEstadual;
+    }
+
+    public String getNomeContato() {
+        return nomeContato;
+    }
+
+    public void setNomeContato(String nomeContato) {
+        this.nomeContato = nomeContato;
     }
 
     public String getEmail() {
@@ -145,19 +179,19 @@ public class Clientes {
         this.cep = cep;
     }
 
-    public LocalDateTime getDataAtualizacao() {
-        return dataAtualizacao;
-    }
-
-    public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
-        this.dataAtualizacao = dataAtualizacao;
-    }
-
     public LocalDateTime getDataCadastro() {
         return dataCadastro;
     }
 
     public void setDataCadastro(LocalDateTime dataCadastro) {
         this.dataCadastro = dataCadastro;
+    }
+
+    public LocalDateTime getDataAtualizacao() {
+        return dataAtualizacao;
+    }
+
+    public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
     }
 }

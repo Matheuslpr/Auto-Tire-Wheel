@@ -3,12 +3,11 @@ package dev.matheus.infrastructure.persistence;
 import dev.matheus.core.enuns.TipoDocumento;
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "funcionarios")
-public class Funcionarios {
+@Table(name = "clientes")
+public class ClientesEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,22 +30,22 @@ public class Funcionarios {
     private String cidade;
     private String estado;
     private String cep;
-    private String cargo;
-    private BigDecimal salario;
 
-    @Column(name = "data_admissao")
-    private LocalDateTime dataAdmissao;
+    @Column(name = "data_cadastro")
+    private LocalDateTime dataCadastro;
 
-    @Column(name = "data_desligamento")
-    private LocalDateTime dataDesligamento;
+    @Column(name = "data_atualizacao")
+    private LocalDateTime dataAtualizacao;
 
     @PrePersist
     public void prePersist() {
-        if (dataAdmissao == null) {
-            dataAdmissao = LocalDateTime.now();
-        }
+        dataCadastro = LocalDateTime.now();
     }
 
+    @PreUpdate
+    public void preUpdate() {
+        dataAtualizacao = LocalDateTime.now();
+    }
 
     //gets and sets
 
@@ -146,36 +145,19 @@ public class Funcionarios {
         this.cep = cep;
     }
 
-    public String getCargo() {
-        return cargo;
+    public LocalDateTime getDataAtualizacao() {
+        return dataAtualizacao;
     }
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
     }
 
-    public BigDecimal getSalario() {
-        return salario;
+    public LocalDateTime getDataCadastro() {
+        return dataCadastro;
     }
 
-    public void setSalario(BigDecimal salario) {
-        this.salario = salario;
+    public void setDataCadastro(LocalDateTime dataCadastro) {
+        this.dataCadastro = dataCadastro;
     }
-
-    public LocalDateTime getDataAdmissao() {
-        return dataAdmissao;
-    }
-
-    public void setDataAdmissao(LocalDateTime dataAdmissao) {
-        this.dataAdmissao = dataAdmissao;
-    }
-
-    public LocalDateTime getDataDesligamento() {
-        return dataDesligamento;
-    }
-
-    public void setDataDesligamento(LocalDateTime dataDesligamento) {
-        this.dataDesligamento = dataDesligamento;
-    }
-
 }

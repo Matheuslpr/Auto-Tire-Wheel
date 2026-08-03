@@ -6,8 +6,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "pneus")
-public class Pneus {
+@Table(name = "produtos")
+public class ProdutosEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,18 +18,7 @@ public class Pneus {
 
     private String codigo;
     private String nome;
-
-    @Column(name = "largura_mm")
-    private Integer larguraMm;
-
-    private Integer perfil;
-    private Integer aro;
-
-    @Column(name = "indice_carga")
-    private String indiceCarga;
-
-    @Column(name = "indice_velocidade")
-    private String indiceVelocidade;
+    private String descricao;
 
     @Column(name = "preco_custo")
     private BigDecimal precoCusto;
@@ -54,6 +43,7 @@ public class Pneus {
     public void preUpdate() {
         dataAtualizacao = LocalDateTime.now();
     }
+
     //gets and sets
 
     public Long getId() {
@@ -88,44 +78,12 @@ public class Pneus {
         this.nome = nome;
     }
 
-    public Integer getLarguraMm() {
-        return larguraMm;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setLarguraMm(Integer larguraMm) {
-        this.larguraMm = larguraMm;
-    }
-
-    public Integer getPerfil() {
-        return perfil;
-    }
-
-    public void setPerfil(Integer perfil) {
-        this.perfil = perfil;
-    }
-
-    public Integer getAro() {
-        return aro;
-    }
-
-    public void setAro(Integer aro) {
-        this.aro = aro;
-    }
-
-    public String getIndiceCarga() {
-        return indiceCarga;
-    }
-
-    public void setIndiceCarga(String indiceCarga) {
-        this.indiceCarga = indiceCarga;
-    }
-
-    public String getIndiceVelocidade() {
-        return indiceVelocidade;
-    }
-
-    public void setIndiceVelocidade(String indiceVelocidade) {
-        this.indiceVelocidade = indiceVelocidade;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public BigDecimal getPrecoCusto() {

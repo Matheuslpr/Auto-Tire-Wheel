@@ -1,14 +1,13 @@
 package dev.matheus.infrastructure.persistence;
 
-import dev.matheus.core.enuns.MaterialRoda;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "rodas")
-public class Rodas {
+@Table(name = "pneus")
+public class PneusEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,24 +18,18 @@ public class Rodas {
 
     private String codigo;
     private String nome;
+
+    @Column(name = "largura_mm")
+    private Integer larguraMm;
+
+    private Integer perfil;
     private Integer aro;
 
-    @Column(name = "largura_polegadas")
-    private BigDecimal larguraPolegadas;
+    @Column(name = "indice_carga")
+    private String indiceCarga;
 
-    private Integer furos;
-
-    @Column(name = "diametro_furacao_mm")
-    private BigDecimal diametroFuracaoMm;
-
-    @Column(name = "offset_et_mm")
-    private Integer offsetEtMm;
-
-    @Enumerated(EnumType.STRING)
-    private MaterialRoda material;
-
-    @Column(name = "cor_acabamento")
-    private String corAcabamento;
+    @Column(name = "indice_velocidade")
+    private String indiceVelocidade;
 
     @Column(name = "preco_custo")
     private BigDecimal precoCusto;
@@ -61,7 +54,6 @@ public class Rodas {
     public void preUpdate() {
         dataAtualizacao = LocalDateTime.now();
     }
-
     //gets and sets
 
     public Long getId() {
@@ -70,6 +62,14 @@ public class Rodas {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getMarcaId() {
+        return marcaId;
+    }
+
+    public void setMarcaId(Long marcaId) {
+        this.marcaId = marcaId;
     }
 
     public String getCodigo() {
@@ -88,6 +88,22 @@ public class Rodas {
         this.nome = nome;
     }
 
+    public Integer getLarguraMm() {
+        return larguraMm;
+    }
+
+    public void setLarguraMm(Integer larguraMm) {
+        this.larguraMm = larguraMm;
+    }
+
+    public Integer getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Integer perfil) {
+        this.perfil = perfil;
+    }
+
     public Integer getAro() {
         return aro;
     }
@@ -96,44 +112,20 @@ public class Rodas {
         this.aro = aro;
     }
 
-    public BigDecimal getLarguraPolegadas() {
-        return larguraPolegadas;
+    public String getIndiceCarga() {
+        return indiceCarga;
     }
 
-    public void setLarguraPolegadas(BigDecimal larguraPolegadas) {
-        this.larguraPolegadas = larguraPolegadas;
+    public void setIndiceCarga(String indiceCarga) {
+        this.indiceCarga = indiceCarga;
     }
 
-    public Integer getFuros() {
-        return furos;
+    public String getIndiceVelocidade() {
+        return indiceVelocidade;
     }
 
-    public void setFuros(Integer furos) {
-        this.furos = furos;
-    }
-
-    public BigDecimal getDiametroFuracaoMm() {
-        return diametroFuracaoMm;
-    }
-
-    public void setDiametroFuracaoMm(BigDecimal diametroFuracaoMm) {
-        this.diametroFuracaoMm = diametroFuracaoMm;
-    }
-
-    public Integer getOffsetEtMm() {
-        return offsetEtMm;
-    }
-
-    public void setOffsetEtMm(Integer offsetEtMm) {
-        this.offsetEtMm = offsetEtMm;
-    }
-
-    public MaterialRoda getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(MaterialRoda material) {
-        this.material = material;
+    public void setIndiceVelocidade(String indiceVelocidade) {
+        this.indiceVelocidade = indiceVelocidade;
     }
 
     public BigDecimal getPrecoCusto() {
@@ -174,21 +166,5 @@ public class Rodas {
 
     public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
         this.dataAtualizacao = dataAtualizacao;
-    }
-
-    public String getCorAcabamento() {
-        return corAcabamento;
-    }
-
-    public void setCorAcabamento(String corAcabamento) {
-        this.corAcabamento = corAcabamento;
-    }
-
-    public Long getMarcaId() {
-        return marcaId;
-    }
-
-    public void setMarcaId(Long marcaId) {
-        this.marcaId = marcaId;
     }
 }

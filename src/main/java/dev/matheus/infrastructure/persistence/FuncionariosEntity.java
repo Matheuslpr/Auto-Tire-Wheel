@@ -3,21 +3,18 @@ package dev.matheus.infrastructure.persistence;
 import dev.matheus.core.enuns.TipoDocumento;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "fornecedores")
-public class Fornecedores {
+@Table(name = "funcionarios")
+public class FuncionariosEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "razao_social")
-    private String razaoSocial;
-
-    @Column(name = "nome_fantasia")
-    private String nomeFantasia;
+    private String nome;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_documento")
@@ -25,12 +22,6 @@ public class Fornecedores {
 
     @Column(name = "numero_documento")
     private String numeroDocumento;
-
-    @Column(name = "inscricao_estadual")
-    private String inscricaoEstadual;
-
-    @Column(name = "nome_contato")
-    private String nomeContato;
 
     private String email;
     private String telefone;
@@ -40,24 +31,24 @@ public class Fornecedores {
     private String cidade;
     private String estado;
     private String cep;
+    private String cargo;
+    private BigDecimal salario;
 
-    @Column(name = "data_cadastro")
-    private LocalDateTime dataCadastro;
+    @Column(name = "data_admissao")
+    private LocalDateTime dataAdmissao;
 
-    @Column(name = "data_atualizacao")
-    private LocalDateTime dataAtualizacao;
+    @Column(name = "data_desligamento")
+    private LocalDateTime dataDesligamento;
 
     @PrePersist
     public void prePersist() {
-        dataCadastro = LocalDateTime.now();
+        if (dataAdmissao == null) {
+            dataAdmissao = LocalDateTime.now();
+        }
     }
 
-    @PreUpdate
-    public void preUpdate() {
-        dataAtualizacao = LocalDateTime.now();
-    }
 
-    // gets and sets
+    //gets and sets
 
     public Long getId() {
         return id;
@@ -67,20 +58,12 @@ public class Fornecedores {
         this.id = id;
     }
 
-    public String getRazaoSocial() {
-        return razaoSocial;
+    public String getNome() {
+        return nome;
     }
 
-    public void setRazaoSocial(String razaoSocial) {
-        this.razaoSocial = razaoSocial;
-    }
-
-    public String getNomeFantasia() {
-        return nomeFantasia;
-    }
-
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public TipoDocumento getTipoDocumento() {
@@ -97,22 +80,6 @@ public class Fornecedores {
 
     public void setNumeroDocumento(String numeroDocumento) {
         this.numeroDocumento = numeroDocumento;
-    }
-
-    public String getInscricaoEstadual() {
-        return inscricaoEstadual;
-    }
-
-    public void setInscricaoEstadual(String inscricaoEstadual) {
-        this.inscricaoEstadual = inscricaoEstadual;
-    }
-
-    public String getNomeContato() {
-        return nomeContato;
-    }
-
-    public void setNomeContato(String nomeContato) {
-        this.nomeContato = nomeContato;
     }
 
     public String getEmail() {
@@ -179,19 +146,36 @@ public class Fornecedores {
         this.cep = cep;
     }
 
-    public LocalDateTime getDataCadastro() {
-        return dataCadastro;
+    public String getCargo() {
+        return cargo;
     }
 
-    public void setDataCadastro(LocalDateTime dataCadastro) {
-        this.dataCadastro = dataCadastro;
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
     }
 
-    public LocalDateTime getDataAtualizacao() {
-        return dataAtualizacao;
+    public BigDecimal getSalario() {
+        return salario;
     }
 
-    public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
-        this.dataAtualizacao = dataAtualizacao;
+    public void setSalario(BigDecimal salario) {
+        this.salario = salario;
     }
+
+    public LocalDateTime getDataAdmissao() {
+        return dataAdmissao;
+    }
+
+    public void setDataAdmissao(LocalDateTime dataAdmissao) {
+        this.dataAdmissao = dataAdmissao;
+    }
+
+    public LocalDateTime getDataDesligamento() {
+        return dataDesligamento;
+    }
+
+    public void setDataDesligamento(LocalDateTime dataDesligamento) {
+        this.dataDesligamento = dataDesligamento;
+    }
+
 }

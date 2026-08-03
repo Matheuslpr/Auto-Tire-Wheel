@@ -1,13 +1,14 @@
 package dev.matheus.infrastructure.persistence;
 
+import dev.matheus.core.enuns.MaterialRoda;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "produtos")
-public class Produtos {
+@Table(name = "rodas")
+public class RodasEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +19,24 @@ public class Produtos {
 
     private String codigo;
     private String nome;
-    private String descricao;
+    private Integer aro;
+
+    @Column(name = "largura_polegadas")
+    private BigDecimal larguraPolegadas;
+
+    private Integer furos;
+
+    @Column(name = "diametro_furacao_mm")
+    private BigDecimal diametroFuracaoMm;
+
+    @Column(name = "offset_et_mm")
+    private Integer offsetEtMm;
+
+    @Enumerated(EnumType.STRING)
+    private MaterialRoda material;
+
+    @Column(name = "cor_acabamento")
+    private String corAcabamento;
 
     @Column(name = "preco_custo")
     private BigDecimal precoCusto;
@@ -54,14 +72,6 @@ public class Produtos {
         this.id = id;
     }
 
-    public Long getMarcaId() {
-        return marcaId;
-    }
-
-    public void setMarcaId(Long marcaId) {
-        this.marcaId = marcaId;
-    }
-
     public String getCodigo() {
         return codigo;
     }
@@ -78,12 +88,52 @@ public class Produtos {
         this.nome = nome;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public Integer getAro() {
+        return aro;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setAro(Integer aro) {
+        this.aro = aro;
+    }
+
+    public BigDecimal getLarguraPolegadas() {
+        return larguraPolegadas;
+    }
+
+    public void setLarguraPolegadas(BigDecimal larguraPolegadas) {
+        this.larguraPolegadas = larguraPolegadas;
+    }
+
+    public Integer getFuros() {
+        return furos;
+    }
+
+    public void setFuros(Integer furos) {
+        this.furos = furos;
+    }
+
+    public BigDecimal getDiametroFuracaoMm() {
+        return diametroFuracaoMm;
+    }
+
+    public void setDiametroFuracaoMm(BigDecimal diametroFuracaoMm) {
+        this.diametroFuracaoMm = diametroFuracaoMm;
+    }
+
+    public Integer getOffsetEtMm() {
+        return offsetEtMm;
+    }
+
+    public void setOffsetEtMm(Integer offsetEtMm) {
+        this.offsetEtMm = offsetEtMm;
+    }
+
+    public MaterialRoda getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(MaterialRoda material) {
+        this.material = material;
     }
 
     public BigDecimal getPrecoCusto() {
@@ -124,5 +174,21 @@ public class Produtos {
 
     public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
         this.dataAtualizacao = dataAtualizacao;
+    }
+
+    public String getCorAcabamento() {
+        return corAcabamento;
+    }
+
+    public void setCorAcabamento(String corAcabamento) {
+        this.corAcabamento = corAcabamento;
+    }
+
+    public Long getMarcaId() {
+        return marcaId;
+    }
+
+    public void setMarcaId(Long marcaId) {
+        this.marcaId = marcaId;
     }
 }
