@@ -2,6 +2,8 @@ package dev.matheus.core.usecases.clientes;
 
 import dev.matheus.core.entities.Clientes;
 
+import java.util.List;
+
 public interface ListarClientesUseCase {
-    Clientes execute(Clientes clientes);
+    List<Clientes> execute();
 }
