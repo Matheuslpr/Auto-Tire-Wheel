@@ -27,7 +27,7 @@ public class ClientesEntityMapper {
         return entity;
     }
 
-    public static Clientes toDomain(ClientesEntity clientes) {
+    public Clientes toDomain(ClientesEntity clientes) {
         return new Clientes(
                 clientes.getId(),
                 clientes.getNome(),
