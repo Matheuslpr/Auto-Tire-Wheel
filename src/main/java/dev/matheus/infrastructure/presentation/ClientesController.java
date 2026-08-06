@@ -63,8 +63,8 @@ public class ClientesController {
     public ResponseEntity<Map<String, Object>> create(@RequestBody ClientesCreateRequest request){
         Clientes create = cadastrarClientesUseCase.execute(clientesCreateMapper.toEntity(request));
         Map<String, Object> response = new HashMap<>();
-        response.put("mensagem" , "Cliente criado com sucesso");
-        response.put("Clientes" , clientesResponseMapper.toDto(create));
+        response.put("mensagem" , "Cliente cadastrado com sucesso");
+        response.put("Cliente" , clientesResponseMapper.toDto(create));
         return ResponseEntity.ok(response);
     }
     @PutMapping("/{id}")
@@ -75,8 +75,8 @@ public class ClientesController {
         }
         Clientes replace = atualizarClientesUseCase.execute(clientesUpdateMapper.merge(existing, request));
         Map<String, Object> response = new HashMap<>();
-        response.put("mensagem" , "Cliente criado com sucesso");
-        response.put("Clientes" , clientesResponseMapper.toDto(replace));
+        response.put("mensagem" , "Cliente atualizado com sucesso");
+        response.put("Cliente" , clientesResponseMapper.toDto(replace));
 
         return ResponseEntity.ok(response);
     }

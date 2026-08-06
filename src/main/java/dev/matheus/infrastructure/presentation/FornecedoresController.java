@@ -59,8 +59,8 @@ public class FornecedoresController {
     public ResponseEntity<Map<String, Object>> create(@RequestBody FornecedoresCreateRequest request){
         Fornecedores create = cadastrarFornecedoresUseCase.execute(fornecedoresCreateMapper.toEntity(request));
         Map<String, Object> response = new HashMap<>();
-        response.put("mensagem" , "Fornecedores criado com sucesso");
-        response.put("Fornecedores" , fornecedoresResponseMapper.toDto(create));
+        response.put("mensagem" , "Fornecedore criado com sucesso");
+        response.put("Fornecedore" , fornecedoresResponseMapper.toDto(create));
         return ResponseEntity.ok(response);
     }
 
@@ -72,8 +72,8 @@ public class FornecedoresController {
         }
         Fornecedores replace = atualizarFornecedoresUseCase.execute(fornecedoresUpdateMapper.merge(existing, request));
         Map<String, Object> response = new HashMap<>();
-        response.put("mensagem" , "Fornecedores criado com sucesso");
-        response.put("Fornecedores" , fornecedoresResponseMapper.toDto(replace));
+        response.put("mensagem" , "Fornecedore atualizado com sucesso");
+        response.put("Fornecedore" , fornecedoresResponseMapper.toDto(replace));
 
         return ResponseEntity.ok(response);
     }
