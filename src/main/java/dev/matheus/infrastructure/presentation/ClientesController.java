@@ -27,20 +27,19 @@ public class ClientesController {
     private final AtualizarClientesUseCase atualizarClientesUseCase;
     private final ListarClientesUseCase listarClientesUseCase;
     private final ClientesCreateMapper clientesCreateMapper;
-    private final ClientesEntityMapper clientesEntityMapper;
     private final ClientesResponseMapper clientesResponseMapper;
     private final ClientesUpdateMapper clientesUpdateMapper;
 
-    public ClientesController(CadastrarClientesUseCase cadastrarClientesUseCase, BuscarClientesUseCase buscarClientesUseCase, AtualizarClientesUseCase atualizarClientesUseCase, ListarClientesUseCase listarClientesUseCase, ClientesCreateMapper clientesCreateMapper, ClientesEntityMapper clientesEntityMapper, ClientesResponseMapper clientesResponseMapper, ClientesUpdateMapper clientesUpdateMapper) {
+    public ClientesController(CadastrarClientesUseCase cadastrarClientesUseCase, BuscarClientesUseCase buscarClientesUseCase, AtualizarClientesUseCase atualizarClientesUseCase, ListarClientesUseCase listarClientesUseCase, ClientesCreateMapper clientesCreateMapper, ClientesResponseMapper clientesResponseMapper, ClientesUpdateMapper clientesUpdateMapper) {
         this.cadastrarClientesUseCase = cadastrarClientesUseCase;
         this.buscarClientesUseCase = buscarClientesUseCase;
         this.atualizarClientesUseCase = atualizarClientesUseCase;
         this.listarClientesUseCase = listarClientesUseCase;
         this.clientesCreateMapper = clientesCreateMapper;
-        this.clientesEntityMapper = clientesEntityMapper;
         this.clientesResponseMapper = clientesResponseMapper;
         this.clientesUpdateMapper = clientesUpdateMapper;
     }
+
 
     @GetMapping
     public ResponseEntity<Map<String, Object>> findAll(){
