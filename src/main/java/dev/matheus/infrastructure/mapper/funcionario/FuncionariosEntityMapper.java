@@ -10,6 +10,7 @@ public class FuncionariosEntityMapper {
     public FuncionariosEntity toEntity(Funcionarios funcionarios) {
         FuncionariosEntity entity = new FuncionariosEntity();
 
+        entity.setId(funcionarios.id());
         entity.setNome(funcionarios.nome());
         entity.setTipoDocumento(funcionarios.tipoDocumento());
         entity.setNumeroDocumento(funcionarios.numeroDocumento());
@@ -29,7 +30,7 @@ public class FuncionariosEntityMapper {
         return entity;
     }
 
-    public static Funcionarios toDomain(FuncionariosEntity funcionarios) {
+    public Funcionarios toDomain(FuncionariosEntity funcionarios) {
         return new Funcionarios(
                 funcionarios.getId(),
                 funcionarios.getNome(),

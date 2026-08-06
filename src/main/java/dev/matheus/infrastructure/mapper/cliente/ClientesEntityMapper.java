@@ -10,6 +10,7 @@ public class ClientesEntityMapper {
     public ClientesEntity toEntity(Clientes clientes) {
         ClientesEntity entity = new ClientesEntity();
 
+        entity.setId(clientes.id());
         entity.setNome(clientes.nome());
         entity.setTipoDocumento(clientes.tipoDocumento());
         entity.setNumeroDocumento(clientes.numeroDocumento());

@@ -10,6 +10,7 @@ public class MarcasEntityMapper {
     public MarcasEntity toEntity(Marcas marcas) {
         MarcasEntity entity = new MarcasEntity();
 
+        entity.setId(marcas.id());
         entity.setNome(marcas.nome());
         entity.setDataCadastro(marcas.dataCadastro());
         entity.setDataAtualizacao(marcas.dataAtualizacao());
@@ -17,7 +18,7 @@ public class MarcasEntityMapper {
         return entity;
     }
 
-    public static Marcas toDomain(MarcasEntity marcas) {
+    public Marcas toDomain(MarcasEntity marcas) {
         return new Marcas(
                 marcas.getId(),
                 marcas.getNome(),

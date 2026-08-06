@@ -10,6 +10,7 @@ public class PneusEntityMapper {
     public PneusEntity toEntity(Pneus pneus) {
         PneusEntity entity = new PneusEntity();
 
+        entity.setId(pneus.id());
         entity.setMarcaId(pneus.marcaId());
         entity.setCodigo(pneus.codigo());
         entity.setNome(pneus.nome());
@@ -27,7 +28,7 @@ public class PneusEntityMapper {
         return entity;
     }
 
-    public static Pneus toDomain(PneusEntity pneus) {
+    public Pneus toDomain(PneusEntity pneus) {
         return new Pneus(
                 pneus.getId(),
                 pneus.getMarcaId(),

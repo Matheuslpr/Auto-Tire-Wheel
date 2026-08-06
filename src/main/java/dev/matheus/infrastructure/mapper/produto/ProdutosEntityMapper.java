@@ -10,6 +10,7 @@ public class ProdutosEntityMapper {
     public ProdutosEntity toEntity(Produtos produtos) {
         ProdutosEntity entity = new ProdutosEntity();
 
+        entity.setId(produtos.id());
         entity.setMarcaId(produtos.marcaId());
         entity.setCodigo(produtos.codigo());
         entity.setNome(produtos.nome());
@@ -23,7 +24,7 @@ public class ProdutosEntityMapper {
         return entity;
     }
 
-    public static Produtos toDomain(ProdutosEntity produtos) {
+    public Produtos toDomain(ProdutosEntity produtos) {
         return new Produtos(
                 produtos.getId(),
                 produtos.getMarcaId(),

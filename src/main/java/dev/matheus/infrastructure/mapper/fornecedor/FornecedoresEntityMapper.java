@@ -9,7 +9,7 @@ public class FornecedoresEntityMapper {
 
     public FornecedoresEntity toEntity(Fornecedores fornecedores) {
         FornecedoresEntity entity = new FornecedoresEntity();
-
+        entity.setId(fornecedores.id());
         entity.setRazaoSocial(fornecedores.razaoSocial());
         entity.setNomeFantasia(fornecedores.nomeFantasia());
         entity.setTipoDocumento(fornecedores.tipoDocumento());
@@ -30,7 +30,7 @@ public class FornecedoresEntityMapper {
         return entity;
     }
 
-    public static Fornecedores toDomain(FornecedoresEntity fornecedores) {
+    public Fornecedores toDomain(FornecedoresEntity fornecedores) {
         return new Fornecedores(
                 fornecedores.getId(),
                 fornecedores.getRazaoSocial(),

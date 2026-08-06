@@ -10,6 +10,7 @@ public class ItensVendaEntityMapper {
     public ItensVendaEntity toEntity(ItensVenda itensVenda) {
         ItensVendaEntity entity = new ItensVendaEntity();
 
+        entity.setId(itensVenda.id());
         entity.setVendaId(itensVenda.vendaId());
         entity.setTipoItem(itensVenda.tipoItem());
         entity.setItemId(itensVenda.itemId());
@@ -20,7 +21,7 @@ public class ItensVendaEntityMapper {
         return entity;
     }
 
-    public static ItensVenda toDomain(ItensVendaEntity itensVenda) {
+    public ItensVenda toDomain(ItensVendaEntity itensVenda) {
         return new ItensVenda(
                 itensVenda.getId(),
                 itensVenda.getVendaId(),
