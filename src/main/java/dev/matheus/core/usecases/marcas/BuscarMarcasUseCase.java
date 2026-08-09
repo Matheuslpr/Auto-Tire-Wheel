@@ -4,5 +4,5 @@ import dev.matheus.core.entities.Marcas;
 
 public interface BuscarMarcasUseCase {
 
-    Marcas execute(Marcas marcas);
+    Marcas execute(Long id);
 }
