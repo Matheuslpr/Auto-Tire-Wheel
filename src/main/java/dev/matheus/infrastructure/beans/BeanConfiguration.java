@@ -3,9 +3,11 @@ package dev.matheus.infrastructure.beans;
 import dev.matheus.core.gateway.ClientesGateway;
 import dev.matheus.core.gateway.FornecedoresGateway;
 import dev.matheus.core.gateway.FuncionariosGateway;
+import dev.matheus.core.gateway.ItensVendaGateway;
 import dev.matheus.core.usecases.clientes.*;
 import dev.matheus.core.usecases.fornecedores.*;
 import dev.matheus.core.usecases.funcionarios.*;
+import dev.matheus.core.usecases.itensVenda.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -86,4 +88,33 @@ public class BeanConfiguration {
     public DeletarFuncionariosUseCase deletarFuncionariosUseCase(FuncionariosGateway funcionariosGateway) {
         return new DeletarFuncionariosUseCaseImpl(funcionariosGateway);
     }
+
+    // Beans for ItensVenda use case
+
+    @Bean
+    public AtualizarItensVendaUseCase atualizarItensVendaUseCase(ItensVendaGateway itensVendaGateway){
+        return new AtualizarItensVendaUseCaseImpl(itensVendaGateway);
+    }
+
+    @Bean
+    public CadastrarItensVendaUseCase cadastrarItensVendaUseCase(ItensVendaGateway itensVendaGateway){
+        return new CadastrarItensVendaUseCaseImpl(itensVendaGateway);
+    }
+
+    @Bean
+    public BuscarItensVendaUseCase buscarItensVendaUseCase(ItensVendaGateway itensVendaGateway){
+        return new BuscarItensVendaUseCaseImpl(itensVendaGateway);
+    }
+
+    @Bean
+    public ListarItensVendaUseCase itensVendaUseCase(ItensVendaGateway itensVendaGateway){
+        return new ListarItensVendaUseCaseImpl(itensVendaGateway);
+    }
+
+    @Bean
+    public DeletarItensVendaUseCase deletarItensVendaUseCase(ItensVendaGateway itensVendaGateway){
+        return new DeletarItensVendaUseCaseImpl(itensVendaGateway);
+    }
+
+
 }
