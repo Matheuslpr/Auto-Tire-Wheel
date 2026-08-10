@@ -1,10 +1,9 @@
 package dev.matheus.infrastructure.gateway;
 
-import dev.matheus.core.entities.Fornecedores;
+
 import dev.matheus.core.entities.Funcionarios;
 import dev.matheus.core.gateway.FuncionariosGateway;
 import dev.matheus.infrastructure.mapper.funcionario.FuncionariosEntityMapper;
-import dev.matheus.infrastructure.persistence.FornecedoresEntity;
 import dev.matheus.infrastructure.persistence.FuncionariosEntity;
 import dev.matheus.infrastructure.persistence.FuncionariosRepository;
 import org.springframework.stereotype.Component;
