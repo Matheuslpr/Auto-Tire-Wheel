@@ -1,13 +1,11 @@
 package dev.matheus.infrastructure.beans;
 
-import dev.matheus.core.gateway.ClientesGateway;
-import dev.matheus.core.gateway.FornecedoresGateway;
-import dev.matheus.core.gateway.FuncionariosGateway;
-import dev.matheus.core.gateway.ItensVendaGateway;
+import dev.matheus.core.gateway.*;
 import dev.matheus.core.usecases.clientes.*;
 import dev.matheus.core.usecases.fornecedores.*;
 import dev.matheus.core.usecases.funcionarios.*;
 import dev.matheus.core.usecases.itensVenda.*;
+import dev.matheus.core.usecases.marcas.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -114,6 +112,33 @@ public class BeanConfiguration {
     @Bean
     public DeletarItensVendaUseCase deletarItensVendaUseCase(ItensVendaGateway itensVendaGateway){
         return new DeletarItensVendaUseCaseImpl(itensVendaGateway);
+    }
+
+    // Beans for Marca use case
+
+    @Bean
+    public AtualizarMarcasUseCase atualizarMarcasUseCase(MarcasGateway marcasGateway){
+        return new AtualizarMarcasUseCaseImpl(marcasGateway);
+    }
+
+    @Bean
+    public CadastrarMarcasUseCase cadastrarMarcasUseCase(MarcasGateway marcasGateway){
+        return new CadastrarMarcasUseCaseImpl(marcasGateway);
+    }
+
+    @Bean
+    public BuscarMarcasUseCase buscarMarcasUseCase(MarcasGateway marcasGateway){
+        return new BuscarMarcasUseCaseImpl(marcasGateway);
+    }
+
+    @Bean
+    public ListarMarcasUseCase listarMarcasUseCase(MarcasGateway marcasGateway){
+        return new ListarMarcasUseCaseImpl(marcasGateway);
+    }
+
+    @Bean
+    public DeletarMarcasUseCase deletarMarcasUseCase(MarcasGateway marcasGateway){
+        return new DeletarMarcasUseCaseImpl(marcasGateway);
     }
 
 
