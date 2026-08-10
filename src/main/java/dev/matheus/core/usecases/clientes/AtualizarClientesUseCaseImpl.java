@@ -32,7 +32,7 @@ public class AtualizarClientesUseCaseImpl implements AtualizarClientesUseCase{
                     clientes.cidade(),
                     clientes.estado(),
                     clientes.cep(),
-                    LocalDateTime.now(),
+                    existente.dataCadastro(),
                     LocalDateTime.now())
         );
     }

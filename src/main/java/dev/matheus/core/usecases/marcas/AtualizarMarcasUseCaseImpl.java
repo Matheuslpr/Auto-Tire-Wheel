@@ -23,7 +23,7 @@ public class AtualizarMarcasUseCaseImpl implements AtualizarMarcasUseCase {
         return gateway.replace(new Marcas(
                 existente.id(),
                 marcas.nome(),
-                LocalDateTime.now(),
+                existente.dataCadastro(),
                 LocalDateTime.now()
         ));
     }

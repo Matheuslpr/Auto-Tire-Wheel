@@ -35,7 +35,7 @@ public class AtualizarFornecedoresUseCaseImpl implements AtualizarFornecedoresUs
                 fornecedores.cidade(),
                 fornecedores.estado(),
                 fornecedores.cep(),
-                LocalDateTime.now(),
+                existente.dataCadastro(),
                 LocalDateTime.now())
         );
     }
