@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class MarcasResponseMapper {
 
-    public MarcasResponse toDto(Marcas marcas) {
+    public static MarcasResponse toDto(Marcas marcas) {
         return new MarcasResponse(
                 marcas.id(),
                 marcas.nome(),
