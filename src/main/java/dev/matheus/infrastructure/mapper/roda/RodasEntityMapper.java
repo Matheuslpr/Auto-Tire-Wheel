@@ -10,6 +10,7 @@ public class RodasEntityMapper {
     public RodasEntity toEntity(Rodas rodas) {
         RodasEntity entity = new RodasEntity();
 
+        entity.setId(rodas.id());
         entity.setMarcaId(rodas.marcaId());
         entity.setCodigo(rodas.codigo());
         entity.setNome(rodas.nome());

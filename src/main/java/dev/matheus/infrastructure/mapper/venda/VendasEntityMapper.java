@@ -10,6 +10,7 @@ public class VendasEntityMapper {
     public VendasEntity toEntity(Vendas vendas) {
         VendasEntity entity = new VendasEntity();
 
+        entity.setId(vendas.id());
         entity.setClienteId(vendas.clienteId());
         entity.setFuncionarioId(vendas.funcionarioId());
         entity.setDataVenda(vendas.dataVenda());
