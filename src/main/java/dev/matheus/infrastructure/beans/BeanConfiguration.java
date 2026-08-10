@@ -6,6 +6,10 @@ import dev.matheus.core.usecases.fornecedores.*;
 import dev.matheus.core.usecases.funcionarios.*;
 import dev.matheus.core.usecases.itensVenda.*;
 import dev.matheus.core.usecases.marcas.*;
+import dev.matheus.core.usecases.pneus.*;
+import dev.matheus.core.usecases.produtos.*;
+import dev.matheus.core.usecases.rodas.*;
+import dev.matheus.core.usecases.vendas.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -141,5 +145,116 @@ public class BeanConfiguration {
         return new DeletarMarcasUseCaseImpl(marcasGateway);
     }
 
+    // Beans for Pneus use case
 
+    @Bean
+    public CadastrarPneusUseCase cadastrarPneusUseCase(PneusGateway pneusGateway){
+        return new CadastrarPneusUseCaseImpl(pneusGateway);
+    }
+
+    @Bean
+    public BuscarPneusUseCase buscarPneusUseCase(PneusGateway pneusGateway){
+        return new BuscarPneusUseCaseImpl(pneusGateway);
+    }
+
+    @Bean
+    public AtualizarPneusUseCase atualizarPneusUseCase(PneusGateway pneusGateway){
+        return new AtualizarPneusUseCaseImpl(pneusGateway);
+    }
+
+    @Bean
+    public ListarPneusUseCase listarPneusUseCase(PneusGateway pneusGateway){
+        return new ListarPneusUseCaseImpl(pneusGateway);
+    }
+
+    @Bean
+    public DeletarPneusUseCase deletarPneusUseCase(PneusGateway pneusGateway){
+        return new DeletarPneusUseCaseImpl(pneusGateway);
+    }
+
+    // Beans for Produtos use case
+
+    @Bean
+    public CadastrarProdutosUseCase cadastrarProdutosUseCase(ProdutosGateway produtosGateway){
+        return new CadastrarProdutosUseCaseImpl(produtosGateway);
+    }
+
+    @Bean
+    public BuscarProdutosUseCase buscarProdutosUseCase(ProdutosGateway produtosGateway){
+        return new BuscarProdutosUseCaseImpl(produtosGateway);
+    }
+
+    @Bean
+    public AtualizarProdutosUseCase atualizarProdutosUseCase(ProdutosGateway produtosGateway){
+        return new AtualizarProdutosUseCaseImpl(produtosGateway);
+    }
+
+    @Bean
+    public ListarProdutosUseCase listarProdutosUseCase(ProdutosGateway produtosGateway){
+        return new ListarProdutosUseCaseImpl(produtosGateway);
+    }
+
+    @Bean
+    public DeletarProdutosUseCase deletarProdutosUseCase(ProdutosGateway produtosGateway){
+        return new DeletarProdutosUseCaseImpl(produtosGateway);
+    }
+
+    // Beans for Rodas use case
+
+    @Bean
+    public CadastrarRodasUseCase cadastrarRodasUseCase(RodasGateway rodasGateway){
+        return new CadastrarRodasUseCaseImpl(rodasGateway);
+    }
+
+    @Bean
+    public BuscarRodasUseCase buscarRodasUseCase(RodasGateway rodasGateway){
+        return new BuscarRodasUseCaseImpl(rodasGateway);
+    }
+
+    @Bean
+    public AtualizarRodasUseCase atualizarRodasUseCase(RodasGateway rodasGateway){
+        return new AtualizarRodasUseCaseImpl(rodasGateway);
+    }
+
+    @Bean
+    public ListarRodasUseCase listarRodasUseCase(RodasGateway rodasGateway){
+        return new ListarRodasUseCaseImpl(rodasGateway);
+    }
+
+    @Bean
+    public DeletarRodasUseCase deletarRodasUseCase(RodasGateway rodasGateway){
+        return new DeletarRodasUseCaseImpl(rodasGateway);
+    }
+
+    // Beans for Vendas use case
+
+    @Bean
+    public CriarVendasUseCase criarVendasUseCase(VendasGateway vendasGateway){
+        return new CriarVendasUseCaseImpl(vendasGateway);
+    }
+
+    @Bean
+    public BuscarVendasUseCase buscarVendasUseCase(VendasGateway vendasGateway){
+        return new BuscarVendasUseCaseImpl(vendasGateway);
+    }
+
+    @Bean
+    public AtualizarVendasUseCase atualizarVendasUseCase(VendasGateway vendasGateway){
+        return new AtualizarVendasUseCaseImpl(vendasGateway);
+    }
+
+    @Bean
+    public ListarVendasUseCase listarVendasUseCase(VendasGateway vendasGateway){
+        return new ListarVendasUseCaseImpl(vendasGateway);
+    }
+
+    @Bean
+    public ConcluirVendasUseCase concluirVendasUseCase(VendasGateway vendasGateway){
+        return new ConcluirVendasUseCaseImpl(vendasGateway);
+    }
+
+    @Bean
+    public CancelarVendasUseCase cancelarVendasUseCase(VendasGateway vendasGateway){
+        return new CancelarVendasUseCaseImpl(vendasGateway);
+    }
 }
