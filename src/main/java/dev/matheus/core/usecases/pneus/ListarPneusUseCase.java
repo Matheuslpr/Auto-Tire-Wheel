@@ -2,6 +2,9 @@ package dev.matheus.core.usecases.pneus;
 
 import dev.matheus.core.entities.Pneus;
 
+import java.util.List;
+
 public interface ListarPneusUseCase {
-    Pneus execute(Pneus pneus);
+
+    List<Pneus> execute();
 }

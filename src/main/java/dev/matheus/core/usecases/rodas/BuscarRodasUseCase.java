@@ -4,6 +4,6 @@ import dev.matheus.core.entities.Rodas;
 
 public interface BuscarRodasUseCase {
 
-    Rodas execute(Rodas rodas);
+    Rodas execute(Long id);
 
 }

@@ -3,16 +3,18 @@ package dev.matheus.core.usecases.vendas;
 import dev.matheus.core.entities.Vendas;
 import dev.matheus.core.gateway.VendasGateway;
 
-public class CriarVendasUseCaseImpl implements CriarVendasUseCase{
+import java.util.List;
+
+public class ListarVendasUseCaseImpl implements ListarVendasUseCase {
 
     private final VendasGateway gateway;
 
-    public CriarVendasUseCaseImpl(VendasGateway gateway) {
+    public ListarVendasUseCaseImpl(VendasGateway gateway) {
         this.gateway = gateway;
     }
 
     @Override
-    public Vendas execute(Vendas vendas) {
-        return gateway.create(vendas);
+    public List<Vendas> execute() {
+        return gateway.findAll();
     }
 }
