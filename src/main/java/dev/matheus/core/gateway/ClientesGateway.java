@@ -10,4 +10,6 @@ public interface ClientesGateway {
     Clientes findById(Long id);
     Clientes replace(Clientes clientes);
     List<Clientes> findAll();
+    Clientes delete(Long id);
+    boolean existsByNumeroDocumento(String numeroDocumento);
 }

@@ -1,17 +1,14 @@
 package dev.matheus.infrastructure.presentation;
 
 import dev.matheus.core.entities.Clientes;
-import dev.matheus.core.usecases.clientes.AtualizarClientesUseCase;
-import dev.matheus.core.usecases.clientes.BuscarClientesUseCase;
-import dev.matheus.core.usecases.clientes.CadastrarClientesUseCase;
-import dev.matheus.core.usecases.clientes.ListarClientesUseCase;
+import dev.matheus.core.usecases.clientes.*;
 import dev.matheus.infrastructure.dto.cliente.ClientesCreateRequest;
 import dev.matheus.infrastructure.dto.cliente.ClientesRequest;
 import dev.matheus.infrastructure.dto.cliente.ClientesResponse;
 import dev.matheus.infrastructure.mapper.cliente.ClientesCreateMapper;
-import dev.matheus.infrastructure.mapper.cliente.ClientesEntityMapper;
 import dev.matheus.infrastructure.mapper.cliente.ClientesResponseMapper;
 import dev.matheus.infrastructure.mapper.cliente.ClientesUpdateMapper;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,20 +23,21 @@ public class ClientesController {
     private final BuscarClientesUseCase buscarClientesUseCase;
     private final AtualizarClientesUseCase atualizarClientesUseCase;
     private final ListarClientesUseCase listarClientesUseCase;
+    private final DeletarClientesUseCase deletarClientesUseCase;
     private final ClientesCreateMapper clientesCreateMapper;
     private final ClientesResponseMapper clientesResponseMapper;
     private final ClientesUpdateMapper clientesUpdateMapper;
 
-    public ClientesController(CadastrarClientesUseCase cadastrarClientesUseCase, BuscarClientesUseCase buscarClientesUseCase, AtualizarClientesUseCase atualizarClientesUseCase, ListarClientesUseCase listarClientesUseCase, ClientesCreateMapper clientesCreateMapper, ClientesResponseMapper clientesResponseMapper, ClientesUpdateMapper clientesUpdateMapper) {
+    public ClientesController(CadastrarClientesUseCase cadastrarClientesUseCase, BuscarClientesUseCase buscarClientesUseCase, AtualizarClientesUseCase atualizarClientesUseCase, ListarClientesUseCase listarClientesUseCase, DeletarClientesUseCase deletarClientesUseCase, ClientesCreateMapper clientesCreateMapper, ClientesResponseMapper clientesResponseMapper, ClientesUpdateMapper clientesUpdateMapper) {
         this.cadastrarClientesUseCase = cadastrarClientesUseCase;
         this.buscarClientesUseCase = buscarClientesUseCase;
         this.atualizarClientesUseCase = atualizarClientesUseCase;
         this.listarClientesUseCase = listarClientesUseCase;
+        this.deletarClientesUseCase = deletarClientesUseCase;
         this.clientesCreateMapper = clientesCreateMapper;
         this.clientesResponseMapper = clientesResponseMapper;
         this.clientesUpdateMapper = clientesUpdateMapper;
     }
-
 
     @GetMapping
     public ResponseEntity<Map<String, Object>> findAll(){
@@ -53,14 +51,11 @@ public class ClientesController {
     @GetMapping("/{id}")
     public ResponseEntity<ClientesResponse> findById(@PathVariable Long id){
         Clientes clientes = buscarClientesUseCase.execute(id);
-        if(clientes == null){
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(clientesResponseMapper.toDto(clientes));
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> create(@RequestBody ClientesCreateRequest request){
+    public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody ClientesCreateRequest request){
         Clientes create = cadastrarClientesUseCase.execute(clientesCreateMapper.toEntity(request));
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem" , "Cliente cadastrado com sucesso");
@@ -68,11 +63,8 @@ public class ClientesController {
         return ResponseEntity.ok(response);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> replace(@PathVariable Long id, @RequestBody ClientesRequest request){
+    public ResponseEntity<Map<String, Object>> replace(@PathVariable Long id,@Valid @RequestBody ClientesRequest request){
         Clientes existing = buscarClientesUseCase.execute(id);
-        if(existing == null){
-            return ResponseEntity.notFound().build();
-        }
         Clientes replace = atualizarClientesUseCase.execute(clientesUpdateMapper.merge(existing, request));
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem" , "Cliente atualizado com sucesso");
@@ -81,4 +73,13 @@ public class ClientesController {
         return ResponseEntity.ok(response);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
+        buscarClientesUseCase.execute(id);
+        Clientes deleted = deletarClientesUseCase.execute(id);
+        Map<String, Object> response = new HashMap<>();
+        response.put("mensagem", "Cliente deletado com sucesso");
+        response.put("Cliente", clientesResponseMapper.toDto(deleted));
+        return ResponseEntity.ok(response);
+    }
 }

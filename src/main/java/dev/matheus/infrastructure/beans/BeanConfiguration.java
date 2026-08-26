@@ -37,6 +37,11 @@ public class BeanConfiguration {
         return new ListarClientesUseCaseImpl(clientesGateway);
     }
 
+    @Bean
+    public DeletarClientesUseCase deletarClientesUseCase(ClientesGateway clientesGateway){
+        return new DeletarClientesUseCaseImpl(clientesGateway);
+    }
+
     // Beans for Fornecedores use cases
 
     @Bean
