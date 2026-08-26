@@ -2,6 +2,7 @@ package dev.matheus.core.usecases.fornecedores;
 
 import dev.matheus.core.entities.Fornecedores;
 import dev.matheus.core.gateway.FornecedoresGateway;
+import dev.matheus.infrastructure.exception.ResourceNotFoundException;
 
 public class BuscarFornecedoresUseCaseImpl implements BuscarFornecedoresUseCase{
 
@@ -15,7 +16,7 @@ public class BuscarFornecedoresUseCaseImpl implements BuscarFornecedoresUseCase{
     public Fornecedores execute(Long id){
         var fornecedor = gateway.findById(id);
         if (fornecedor == null){
-            throw new IllegalArgumentException("Fornecedor não encontrado");
+            throw new ResourceNotFoundException("Fornecedor não encontrado");
         }
         return fornecedor;
     }

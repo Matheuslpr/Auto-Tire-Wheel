@@ -11,4 +11,5 @@ public interface FornecedoresGateway {
     Fornecedores replace(Fornecedores fornecedores);
     List<Fornecedores> findAll();
     Fornecedores delete(Long id);
+    boolean existsByNumeroDocumento(String numeroDocumento);
 }

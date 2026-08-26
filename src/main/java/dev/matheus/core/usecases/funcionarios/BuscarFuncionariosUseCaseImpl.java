@@ -2,6 +2,7 @@ package dev.matheus.core.usecases.funcionarios;
 
 import dev.matheus.core.entities.Funcionarios;
 import dev.matheus.core.gateway.FuncionariosGateway;
+import dev.matheus.infrastructure.exception.ResourceNotFoundException;
 
 public class BuscarFuncionariosUseCaseImpl implements BuscarFuncionariosUseCase{
 
@@ -15,7 +16,7 @@ public class BuscarFuncionariosUseCaseImpl implements BuscarFuncionariosUseCase{
     public Funcionarios execute(Long id){
         var funcionario = gateway.findById(id);
         if(funcionario == null){
-            throw  new IllegalArgumentException("Funcionário não encontrado");
+            throw  new ResourceNotFoundException("Funcionário não encontrado");
         }
         return funcionario;
     }

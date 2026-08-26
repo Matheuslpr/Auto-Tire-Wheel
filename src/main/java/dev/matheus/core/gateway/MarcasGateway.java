@@ -11,4 +11,5 @@ public interface MarcasGateway {
     Marcas replace(Marcas marcas);
     List<Marcas> findAll();
     Marcas delete(Long id);
+    boolean existsByNome(String nome);
 }

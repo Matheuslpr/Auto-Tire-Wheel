@@ -8,6 +8,7 @@ import dev.matheus.infrastructure.dto.produto.ProdutosResponse;
 import dev.matheus.infrastructure.mapper.produto.ProdutosCreateMapper;
 import dev.matheus.infrastructure.mapper.produto.ProdutosResponseMapper;
 import dev.matheus.infrastructure.mapper.produto.ProdutosUpdateMapper;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,7 +54,7 @@ public class ProdutosController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> create(@RequestBody ProdutosCreateRequest request){
+    public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody ProdutosCreateRequest request){
         Produtos create = cadastrarProdutosUseCase.execute(produtosCreateMapper.toEntity(request));
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem", "Produto cadastrado com sucesso");
@@ -62,7 +63,7 @@ public class ProdutosController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> replace(@PathVariable Long id,@RequestBody ProdutosRequest request){
+    public ResponseEntity<Map<String, Object>> replace(@PathVariable Long id,@Valid @RequestBody ProdutosRequest request){
         Produtos existing = buscarProdutosUseCase.execute(id);
         Produtos replace = atualizarProdutosUseCase.execute(produtosUpdateMapper.merge(existing, request));
         Map<String, Object> response = new HashMap<>();

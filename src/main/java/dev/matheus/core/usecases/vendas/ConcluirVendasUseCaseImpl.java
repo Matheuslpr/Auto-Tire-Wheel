@@ -3,6 +3,7 @@ package dev.matheus.core.usecases.vendas;
 import dev.matheus.core.entities.Vendas;
 import dev.matheus.core.enuns.StatusVenda;
 import dev.matheus.core.gateway.VendasGateway;
+import dev.matheus.infrastructure.exception.ResourceNotFoundException;
 
 import java.time.LocalDateTime;
 
@@ -18,7 +19,7 @@ public class ConcluirVendasUseCaseImpl implements ConcluirVendasUseCase {
     public Vendas execute(Long id) {
         var existente = gateway.findById(id);
         if (existente == null) {
-            throw new IllegalArgumentException("Venda não encontrada");
+            throw new ResourceNotFoundException("Venda não encontrada");
         }
         if (existente.status() != StatusVenda.ABERTA) {
             throw new IllegalStateException("Somente vendas em aberto podem ser concluídas");

@@ -2,6 +2,7 @@ package dev.matheus.core.usecases.fornecedores;
 
 import dev.matheus.core.entities.Fornecedores;
 import dev.matheus.core.gateway.FornecedoresGateway;
+import dev.matheus.infrastructure.exception.ResourceNotFoundException;
 
 import java.time.LocalDateTime;
 
@@ -17,7 +18,7 @@ public class AtualizarFornecedoresUseCaseImpl implements AtualizarFornecedoresUs
     public Fornecedores execute(Fornecedores fornecedores){
         var existente = gateway.findById(fornecedores.id());
         if(existente == null){
-            throw new IllegalArgumentException("Fornecedores não encontrado");
+            throw new ResourceNotFoundException("Fornecedores não encontrado");
         }
         return gateway.replace( new Fornecedores(
                 existente.id(),

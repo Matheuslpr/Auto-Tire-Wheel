@@ -8,6 +8,7 @@ import dev.matheus.infrastructure.dto.roda.RodasResponse;
 import dev.matheus.infrastructure.mapper.roda.RodasCreateMapper;
 import dev.matheus.infrastructure.mapper.roda.RodasResponseMapper;
 import dev.matheus.infrastructure.mapper.roda.RodasUpdateMapper;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +40,7 @@ public class RodasController {
     }
 
     @GetMapping
-    public ResponseEntity<Map<String, Object>> findAll(){
+    public ResponseEntity<Map<String, Object>> findAll() {
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem", "Rodas listadas com sucesso");
         response.put("Rodas", listarRodasUseCase.execute().stream().map(rodasResponseMapper::toDto).toList());
@@ -47,13 +48,13 @@ public class RodasController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RodasResponse> findById(@PathVariable Long id){
+    public ResponseEntity<RodasResponse> findById(@PathVariable Long id) {
         Rodas rodas = buscarRodasUseCase.execute(id);
         return ResponseEntity.ok(rodasResponseMapper.toDto(rodas));
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> create(@RequestBody RodasCreateRequest request){
+    public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody RodasCreateRequest request) {
         Rodas create = cadastrarRodasUseCase.execute(rodasCreateMapper.toEntity(request));
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem", "Roda cadastrada com sucesso");
@@ -62,7 +63,7 @@ public class RodasController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> replace(@PathVariable Long id,@RequestBody RodasRequest request){
+    public ResponseEntity<Map<String, Object>> replace(@PathVariable Long id, @Valid @RequestBody RodasRequest request) {
         Rodas existing = buscarRodasUseCase.execute(id);
         Rodas replace = atualizarRodasUseCase.execute(rodasUpdateMapper.merge(existing, request));
         Map<String, Object> response = new HashMap<>();
@@ -72,7 +73,7 @@ public class RodasController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id){
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id) {
         buscarRodasUseCase.execute(id);
         Rodas deleted = deletarRodasUseCase.execute(id);
         Map<String, Object> response = new HashMap<>();

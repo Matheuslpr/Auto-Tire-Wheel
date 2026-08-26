@@ -8,6 +8,7 @@ import dev.matheus.infrastructure.dto.itemVenda.ItensVendaResponse;
 import dev.matheus.infrastructure.mapper.itemVenda.ItensVendaCreateMapper;
 import dev.matheus.infrastructure.mapper.itemVenda.ItensVendaResponseMapper;
 import dev.matheus.infrastructure.mapper.itemVenda.ItensVendaUpdateMapper;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,14 +50,11 @@ public class ItensVendaController {
     @GetMapping("/{id}")
     public ResponseEntity<ItensVendaResponse> findById(@PathVariable Long id){
         ItensVenda itens = buscarItensVendaUseCase.execute(id);
-        if(itens == null){
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(itensVendaResponseMapper.toDto(itens));
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> create(@RequestBody ItensVendaCreateRequest request){
+    public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody ItensVendaCreateRequest request){
         ItensVenda create = cadastrarItensVendaUseCase.execute(itensVendaCreateMapper.toEntity(request));
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem" , "Item cadastrado com sucesso");
@@ -65,11 +63,8 @@ public class ItensVendaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> replace(@PathVariable Long id, @RequestBody ItensVendaRequest request){
+    public ResponseEntity<Map<String, Object>> replace(@PathVariable Long id, @Valid @RequestBody ItensVendaRequest request){
         ItensVenda existing = buscarItensVendaUseCase.execute(id);
-        if(existing == null){
-            return ResponseEntity.notFound().build();
-        }
         ItensVenda replace = atualizarItensVendaUseCase.execute(itensVendaUpdateMapper.merge(existing, request));
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem" , "item atualizado com sucesso");
@@ -80,14 +75,12 @@ public class ItensVendaController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id){
-        ItensVenda existing = buscarItensVendaUseCase.execute(id);
-        if(existing == null) {
-            return ResponseEntity.notFound().build();
-        }
+        buscarItensVendaUseCase.execute(id);
         ItensVenda deleted = deletarItensVendaUseCase.execute(id);
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem" , "item deletado com sucesso");
         response.put("item" , itensVendaResponseMapper.toDto(deleted));
-        return ResponseEntity.ok(response);}
+        return ResponseEntity.ok(response);
+    }
 
 }

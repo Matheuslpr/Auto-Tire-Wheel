@@ -1,11 +1,8 @@
 package dev.matheus.core.usecases.funcionarios;
 
 import dev.matheus.core.entities.Funcionarios;
-import dev.matheus.core.enuns.TipoDocumento;
 import dev.matheus.core.gateway.FuncionariosGateway;
-
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import dev.matheus.infrastructure.exception.ResourceNotFoundException;
 
 public class AtualizarFuncionariosUseCaseImpl implements AtualizarFuncionariosUseCase {
 
@@ -18,7 +15,7 @@ public class AtualizarFuncionariosUseCaseImpl implements AtualizarFuncionariosUs
     public Funcionarios execute(Funcionarios funcionarios) {
         var existente = gateway.findById(funcionarios.id());
         if (existente == null) {
-            throw new IllegalArgumentException("Funcionário não encontrado");
+            throw new ResourceNotFoundException("Funcionário não encontrado");
         }
         return gateway.replace(new Funcionarios(
                 existente.id(),

@@ -8,6 +8,7 @@ import dev.matheus.infrastructure.dto.venda.VendasResponse;
 import dev.matheus.infrastructure.mapper.venda.VendasCreateMapper;
 import dev.matheus.infrastructure.mapper.venda.VendasResponseMapper;
 import dev.matheus.infrastructure.mapper.venda.VendasUpdateMapper;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,7 +56,7 @@ public class VendasController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> create(@RequestBody VendasCreateRequest request){
+    public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody VendasCreateRequest request){
         Vendas create = criarVendasUseCase.execute(vendasCreateMapper.toEntity(request));
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem", "Venda criada com sucesso");
@@ -64,7 +65,7 @@ public class VendasController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> replace(@PathVariable Long id,@RequestBody VendasRequest request){
+    public ResponseEntity<Map<String, Object>> replace(@PathVariable Long id,@Valid @RequestBody VendasRequest request){
         Vendas existing = buscarVendasUseCase.execute(id);
         Vendas replace = atualizarVendasUseCase.execute(vendasUpdateMapper.merge(existing, request));
         Map<String, Object> response = new HashMap<>();

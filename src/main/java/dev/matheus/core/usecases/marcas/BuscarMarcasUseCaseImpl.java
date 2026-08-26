@@ -2,6 +2,7 @@ package dev.matheus.core.usecases.marcas;
 
 import dev.matheus.core.entities.Marcas;
 import dev.matheus.core.gateway.MarcasGateway;
+import dev.matheus.infrastructure.exception.ResourceNotFoundException;
 
 public class BuscarMarcasUseCaseImpl implements BuscarMarcasUseCase{
 
@@ -15,7 +16,7 @@ public class BuscarMarcasUseCaseImpl implements BuscarMarcasUseCase{
     public Marcas execute(Long id){
         var marcas = gateway.findById(id);
         if(marcas == null){
-            throw  new IllegalArgumentException("marca não encontrada");
+            throw  new ResourceNotFoundException("marca não encontrada");
         }
         return marcas;
     }

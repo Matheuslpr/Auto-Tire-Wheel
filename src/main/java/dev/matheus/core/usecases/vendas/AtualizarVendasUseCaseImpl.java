@@ -3,6 +3,7 @@ package dev.matheus.core.usecases.vendas;
 import dev.matheus.core.entities.Vendas;
 import dev.matheus.core.enuns.StatusVenda;
 import dev.matheus.core.gateway.VendasGateway;
+import dev.matheus.infrastructure.exception.ResourceNotFoundException;
 
 public class AtualizarVendasUseCaseImpl implements AtualizarVendasUseCase {
 
@@ -16,7 +17,7 @@ public class AtualizarVendasUseCaseImpl implements AtualizarVendasUseCase {
     public Vendas execute(Vendas vendas) {
         var existente = gateway.findById(vendas.id());
         if (existente == null) {
-            throw new IllegalArgumentException("Venda não encontrada");
+            throw new ResourceNotFoundException("Venda não encontrada");
         }
         if (existente.status() != StatusVenda.ABERTA) {
             throw new IllegalStateException("Somente vendas em aberto podem ser alteradas");

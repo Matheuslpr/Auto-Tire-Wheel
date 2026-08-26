@@ -2,6 +2,7 @@ package dev.matheus.core.usecases.rodas;
 
 import dev.matheus.core.entities.Rodas;
 import dev.matheus.core.gateway.RodasGateway;
+import dev.matheus.infrastructure.exception.ResourceNotFoundException;
 
 public class AtualizarRodasUseCaseImpl implements AtualizarRodasUseCase {
 
@@ -15,7 +16,7 @@ public class AtualizarRodasUseCaseImpl implements AtualizarRodasUseCase {
     public Rodas execute(Rodas rodas) {
         var existente = gateway.findById(rodas.id());
         if (existente == null) {
-            throw new IllegalArgumentException("Roda não encontrada");
+            throw new ResourceNotFoundException("Roda não encontrada");
         }
         return gateway.replace(new Rodas(
                 existente.id(),

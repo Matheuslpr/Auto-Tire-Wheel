@@ -11,4 +11,5 @@ public interface FuncionariosGateway {
     Funcionarios replace(Funcionarios funcionarios);
     List<Funcionarios> findAll();
     Funcionarios delete(Long id);
+    boolean existsByNumeroDocumento(String numeroDocumento);
 }

@@ -2,6 +2,7 @@ package dev.matheus.core.usecases.marcas;
 
 import dev.matheus.core.entities.Marcas;
 import dev.matheus.core.gateway.MarcasGateway;
+import dev.matheus.infrastructure.exception.ResourceNotFoundException;
 
 import java.time.LocalDateTime;
 
@@ -18,7 +19,7 @@ public class AtualizarMarcasUseCaseImpl implements AtualizarMarcasUseCase {
 
         var existente = gateway.findById(marcas.id());
         if (existente == null) {
-            throw new IllegalArgumentException("Marca não encontrada");
+            throw new ResourceNotFoundException("Marca não encontrada");
         }
         return gateway.replace(new Marcas(
                 existente.id(),

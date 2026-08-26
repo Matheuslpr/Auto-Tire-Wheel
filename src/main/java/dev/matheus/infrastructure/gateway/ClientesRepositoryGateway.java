@@ -48,4 +48,18 @@ public class ClientesRepositoryGateway implements ClientesGateway {
                 .toList();
     }
 
+    @Override
+    public Clientes delete(Long id) {
+        return repository.findById(id)
+                .map(entity -> {
+                    repository.delete(entity);
+                    return entityMapper.toDomain(entity);
+                })
+                .orElse(null);
+    }
+
+    @Override
+    public boolean existsByNumeroDocumento(String numeroDocumento) {
+        return  repository.existsByNumeroDocumento(numeroDocumento);
+    }
 }

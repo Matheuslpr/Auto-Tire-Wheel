@@ -57,4 +57,9 @@ public class MarcasRepositoryGateway implements MarcasGateway {
                 })
                 .orElse(null);
     }
+
+    @Override
+    public boolean existsByNome(String nome) {
+        return repository.existsByNome(nome);
+    }
 }

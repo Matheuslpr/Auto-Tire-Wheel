@@ -2,6 +2,7 @@ package dev.matheus.core.usecases.pneus;
 
 import dev.matheus.core.entities.Pneus;
 import dev.matheus.core.gateway.PneusGateway;
+import dev.matheus.infrastructure.exception.ResourceNotFoundException;
 
 public class BuscarPneusUseCaseImpl implements BuscarPneusUseCase{
 
@@ -15,7 +16,7 @@ public class BuscarPneusUseCaseImpl implements BuscarPneusUseCase{
     public Pneus execute(Long id){
         var pneu = gateway.findById(id);
         if (pneu == null) {
-            throw new IllegalArgumentException("Pneu não encontrado");
+            throw new ResourceNotFoundException("Pneu não encontrado");
         }
         return pneu;
     }

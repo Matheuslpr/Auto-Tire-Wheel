@@ -58,4 +58,9 @@ public class FuncionariosRepositoryGateway implements FuncionariosGateway {
                 })
                 .orElse(null);
     }
+
+    @Override
+    public boolean existsByNumeroDocumento(String numeroDocumento) {
+        return repository.existsByNumeroDocumento(numeroDocumento);
+    }
 }

@@ -2,6 +2,7 @@ package dev.matheus.core.usecases.rodas;
 
 import dev.matheus.core.entities.Rodas;
 import dev.matheus.core.gateway.RodasGateway;
+import dev.matheus.infrastructure.exception.ResourceNotFoundException;
 
 public class BuscarRodasUseCaseImpl implements BuscarRodasUseCase{
 
@@ -15,7 +16,7 @@ public class BuscarRodasUseCaseImpl implements BuscarRodasUseCase{
     public Rodas execute(Long id) {
         var roda = gateway.findById(id);
         if (roda == null) {
-            throw new IllegalArgumentException("Roda não encontrada");
+            throw new ResourceNotFoundException("Roda não encontrada");
         }
         return roda;
     }

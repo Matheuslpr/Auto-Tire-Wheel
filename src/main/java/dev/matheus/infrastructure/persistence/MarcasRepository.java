@@ -3,4 +3,5 @@ package dev.matheus.infrastructure.persistence;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MarcasRepository extends JpaRepository<MarcasEntity, Long> {
+    boolean existsByNome(String nome);
 }

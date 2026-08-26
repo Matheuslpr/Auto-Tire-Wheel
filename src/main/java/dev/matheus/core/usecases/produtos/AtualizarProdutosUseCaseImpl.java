@@ -2,6 +2,7 @@ package dev.matheus.core.usecases.produtos;
 
 import dev.matheus.core.entities.Produtos;
 import dev.matheus.core.gateway.ProdutosGateway;
+import dev.matheus.infrastructure.exception.ResourceNotFoundException;
 
 public class AtualizarProdutosUseCaseImpl implements AtualizarProdutosUseCase {
 
@@ -15,7 +16,7 @@ public class AtualizarProdutosUseCaseImpl implements AtualizarProdutosUseCase {
     public Produtos execute(Produtos produtos) {
         var existente = gateway.findById(produtos.id());
         if (existente == null) {
-            throw new IllegalArgumentException("Produto não encontrado");
+            throw new ResourceNotFoundException("Produto não encontrado");
         }
         return gateway.replace(new Produtos(
                 existente.id(),

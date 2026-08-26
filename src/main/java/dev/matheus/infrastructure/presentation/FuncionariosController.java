@@ -8,6 +8,7 @@ import dev.matheus.infrastructure.dto.funcionario.FuncionariosResponse;
 import dev.matheus.infrastructure.mapper.funcionario.FuncionariosCreateMapper;
 import dev.matheus.infrastructure.mapper.funcionario.FuncionariosResponseMapper;
 import dev.matheus.infrastructure.mapper.funcionario.FuncionariosUpdateMapper;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,14 +50,11 @@ public class FuncionariosController {
     @GetMapping("/{id}")
     public ResponseEntity<FuncionariosResponse> findById(@PathVariable Long id){
         Funcionarios funcionarios = buscarFuncionariosUseCase.execute(id);
-        if(funcionarios == null){
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(funcionariosResponseMapper.toDto(funcionarios));
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> create(@RequestBody FuncionariosCreateRequest request){
+    public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody FuncionariosCreateRequest request){
         Funcionarios create = cadastrarFuncionariosUseCase.execute(funcionariosCreateMapper.toEntity(request));
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem" , "funcionario cadastrado com sucesso");
@@ -65,11 +63,8 @@ public class FuncionariosController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> replace(@PathVariable Long id, @RequestBody FuncionariosRequest request){
+    public ResponseEntity<Map<String, Object>> replace(@PathVariable Long id,@Valid @RequestBody FuncionariosRequest request){
         Funcionarios existing = buscarFuncionariosUseCase.execute(id);
-        if(existing == null){
-            return ResponseEntity.notFound().build();
-        }
         Funcionarios replace = atualizarFuncionariosUseCase.execute(funcionariosUpdateMapper.merge(existing, request));
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem" , "funcionario atualizado com sucesso");
@@ -80,14 +75,11 @@ public class FuncionariosController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id){
-        Funcionarios existing = buscarFuncionariosUseCase.execute(id);
-        if(existing == null) {
-            return ResponseEntity.notFound().build();
-        }
+        buscarFuncionariosUseCase.execute(id);
         Funcionarios deleted = deletarFuncionariosUseCase.execute(id);
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem" , "funcionario deletado com sucesso");
         response.put("funcionario" , funcionariosResponseMapper.toDto(deleted));
-        return ResponseEntity.ok(response);}
-
+        return ResponseEntity.ok(response);
+    }
 }

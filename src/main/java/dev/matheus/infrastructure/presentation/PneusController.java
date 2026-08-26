@@ -8,6 +8,7 @@ import dev.matheus.infrastructure.dto.pneu.PneusResponse;
 import dev.matheus.infrastructure.mapper.pneu.PneusCreateMapper;
 import dev.matheus.infrastructure.mapper.pneu.PneusResponseMapper;
 import dev.matheus.infrastructure.mapper.pneu.PneusUpdateMapper;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,7 +54,7 @@ public class PneusController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> create(@RequestBody PneusCreateRequest request){
+    public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody PneusCreateRequest request){
         Pneus create = cadastrarPneusUseCase.execute(pneusCreateMapper.toEntity(request));
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem", "Pneu cadastrado com sucesso");
@@ -62,7 +63,7 @@ public class PneusController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> replace(@PathVariable Long id, @RequestBody PneusRequest request){
+    public ResponseEntity<Map<String, Object>> replace(@PathVariable Long id,@Valid @RequestBody PneusRequest request){
         Pneus existing = buscarPneusUseCase.execute(id);
         Pneus replace = atualizarPneusUseCase.execute(pneusUpdateMapper.merge(existing, request));
         Map<String, Object> response = new HashMap<>();

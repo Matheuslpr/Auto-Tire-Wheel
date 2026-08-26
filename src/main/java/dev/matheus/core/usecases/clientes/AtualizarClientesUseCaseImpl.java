@@ -2,6 +2,7 @@ package dev.matheus.core.usecases.clientes;
 
 import dev.matheus.core.entities.Clientes;
 import dev.matheus.core.gateway.ClientesGateway;
+import dev.matheus.infrastructure.exception.ResourceNotFoundException;
 
 import java.time.LocalDateTime;
 
@@ -17,7 +18,7 @@ public class AtualizarClientesUseCaseImpl implements AtualizarClientesUseCase{
     public Clientes execute(Clientes clientes){
         var existente = gateway.findById(clientes.id());
         if(existente == null){
-            throw new IllegalArgumentException("Cliente não encontrado");
+            throw new ResourceNotFoundException("Cliente não encontrado");
         }
         return gateway.replace( new Clientes(
                 existente.id(),

@@ -8,6 +8,7 @@ import dev.matheus.infrastructure.dto.fornecedor.FornecedoresResponse;
 import dev.matheus.infrastructure.mapper.fornecedor.FornecedoresCreateMapper;
 import dev.matheus.infrastructure.mapper.fornecedor.FornecedoresResponseMapper;
 import dev.matheus.infrastructure.mapper.fornecedor.FornecedoresUpdateMapper;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,14 +50,11 @@ public class FornecedoresController {
     @GetMapping("/{id}")
     public ResponseEntity<FornecedoresResponse> findById(@PathVariable Long id){
         Fornecedores fornecedores = buscarFornecedoresUseCase.execute(id);
-        if(fornecedores == null){
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(fornecedoresResponseMapper.toDto(fornecedores));
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> create(@RequestBody FornecedoresCreateRequest request){
+    public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody FornecedoresCreateRequest request){
         Fornecedores create = cadastrarFornecedoresUseCase.execute(fornecedoresCreateMapper.toEntity(request));
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem" , "Fornecedore criado com sucesso");
@@ -65,11 +63,8 @@ public class FornecedoresController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Map<String, Object>> replace(@PathVariable Long id, @RequestBody FornecedoresRequest request){
+    public ResponseEntity<Map<String, Object>> replace(@PathVariable Long id,@Valid @RequestBody FornecedoresRequest request){
         Fornecedores existing = buscarFornecedoresUseCase.execute(id);
-        if(existing == null){
-            return ResponseEntity.notFound().build();
-        }
         Fornecedores replace = atualizarFornecedoresUseCase.execute(fornecedoresUpdateMapper.merge(existing, request));
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem" , "Fornecedore atualizado com sucesso");
@@ -80,14 +75,12 @@ public class FornecedoresController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id){
-        Fornecedores existing = buscarFornecedoresUseCase.execute(id);
-        if(existing == null) {
-            return ResponseEntity.notFound().build();
-        }
+        buscarFornecedoresUseCase.execute(id);
         Fornecedores deleted = deletarFornecedoresUseCase.execute(id);
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem" , "Fornecedor deletado com sucesso");
         response.put("Fornecedor" , fornecedoresResponseMapper.toDto(deleted));
-        return ResponseEntity.ok(response);}
+        return ResponseEntity.ok(response);
+    }
 
 }

@@ -2,6 +2,7 @@ package dev.matheus.core.usecases.itensVenda;
 
 import dev.matheus.core.entities.ItensVenda;
 import dev.matheus.core.gateway.ItensVendaGateway;
+import dev.matheus.infrastructure.exception.ResourceNotFoundException;
 
 public class BuscarItensVendaUseCaseImpl implements BuscarItensVendaUseCase{
 
@@ -15,7 +16,7 @@ public class BuscarItensVendaUseCaseImpl implements BuscarItensVendaUseCase{
     public ItensVenda execute(Long id){
         var itensVenda = gateway.findById(id);
         if(itensVenda == null){
-            throw  new IllegalArgumentException("itens não encontrado");
+            throw  new ResourceNotFoundException("itens não encontrado");
         }
         return itensVenda;
     }
