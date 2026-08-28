@@ -24,16 +24,18 @@ public class ClientesController {
     private final AtualizarClientesUseCase atualizarClientesUseCase;
     private final ListarClientesUseCase listarClientesUseCase;
     private final DeletarClientesUseCase deletarClientesUseCase;
+    private final FiltrarDocumentoClientesUsecase filtrarDocumentoClientesUsecase;
     private final ClientesCreateMapper clientesCreateMapper;
     private final ClientesResponseMapper clientesResponseMapper;
     private final ClientesUpdateMapper clientesUpdateMapper;
 
-    public ClientesController(CadastrarClientesUseCase cadastrarClientesUseCase, BuscarClientesUseCase buscarClientesUseCase, AtualizarClientesUseCase atualizarClientesUseCase, ListarClientesUseCase listarClientesUseCase, DeletarClientesUseCase deletarClientesUseCase, ClientesCreateMapper clientesCreateMapper, ClientesResponseMapper clientesResponseMapper, ClientesUpdateMapper clientesUpdateMapper) {
+    public ClientesController(CadastrarClientesUseCase cadastrarClientesUseCase, BuscarClientesUseCase buscarClientesUseCase, AtualizarClientesUseCase atualizarClientesUseCase, ListarClientesUseCase listarClientesUseCase, DeletarClientesUseCase deletarClientesUseCase, FiltrarDocumentoClientesUsecase filtrarDocumentoClientesUsecase, ClientesCreateMapper clientesCreateMapper, ClientesResponseMapper clientesResponseMapper, ClientesUpdateMapper clientesUpdateMapper) {
         this.cadastrarClientesUseCase = cadastrarClientesUseCase;
         this.buscarClientesUseCase = buscarClientesUseCase;
         this.atualizarClientesUseCase = atualizarClientesUseCase;
         this.listarClientesUseCase = listarClientesUseCase;
         this.deletarClientesUseCase = deletarClientesUseCase;
+        this.filtrarDocumentoClientesUsecase = filtrarDocumentoClientesUsecase;
         this.clientesCreateMapper = clientesCreateMapper;
         this.clientesResponseMapper = clientesResponseMapper;
         this.clientesUpdateMapper = clientesUpdateMapper;
@@ -52,6 +54,12 @@ public class ClientesController {
     public ResponseEntity<ClientesResponse> findById(@PathVariable Long id){
         Clientes clientes = buscarClientesUseCase.execute(id);
         return ResponseEntity.ok(clientesResponseMapper.toDto(clientes));
+    }
+
+    @GetMapping("/documento/{numeroDocumento}")
+    public ResponseEntity<ClientesResponse> findByDocumento(@PathVariable String numeroDocumento) {
+        Clientes cliente = filtrarDocumentoClientesUsecase.execute(numeroDocumento);
+        return ResponseEntity.ok(clientesResponseMapper.toDto(cliente));
     }
 
     @PostMapping

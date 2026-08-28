@@ -9,6 +9,7 @@ import dev.matheus.infrastructure.persistence.FuncionariosRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class FuncionariosRepositoryGateway implements FuncionariosGateway {
@@ -62,5 +63,11 @@ public class FuncionariosRepositoryGateway implements FuncionariosGateway {
     @Override
     public boolean existsByNumeroDocumento(String numeroDocumento) {
         return repository.existsByNumeroDocumento(numeroDocumento);
+    }
+
+    @Override
+    public Optional<Funcionarios> filtrarPorDocumento(String numeroDocumento) {
+        return repository.findByNumeroDocumento(numeroDocumento)
+                .map(entityMapper::toDomain);
     }
 }

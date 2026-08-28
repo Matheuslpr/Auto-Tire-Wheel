@@ -3,6 +3,7 @@ package dev.matheus.core.gateway;
 import dev.matheus.core.entities.Clientes;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ClientesGateway {
 
@@ -12,4 +13,6 @@ public interface ClientesGateway {
     List<Clientes> findAll();
     Clientes delete(Long id);
     boolean existsByNumeroDocumento(String numeroDocumento);
+    Optional<Clientes> filtrarPorDocumento(String numeroDocumento);
+
 }

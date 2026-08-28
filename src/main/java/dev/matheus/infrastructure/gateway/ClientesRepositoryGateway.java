@@ -8,6 +8,7 @@ import dev.matheus.infrastructure.persistence.ClientesRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ClientesRepositoryGateway implements ClientesGateway {
@@ -61,5 +62,11 @@ public class ClientesRepositoryGateway implements ClientesGateway {
     @Override
     public boolean existsByNumeroDocumento(String numeroDocumento) {
         return  repository.existsByNumeroDocumento(numeroDocumento);
+    }
+
+    @Override
+    public Optional<Clientes> filtrarPorDocumento(String numeroDocumento) {
+        return repository.findByNumeroDocumento(numeroDocumento)
+                .map(entityMapper::toDomain);
     }
 }

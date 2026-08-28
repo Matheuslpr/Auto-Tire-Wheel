@@ -3,6 +3,7 @@ package dev.matheus.core.gateway;
 import dev.matheus.core.entities.Funcionarios;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface FuncionariosGateway {
 
@@ -12,4 +13,5 @@ public interface FuncionariosGateway {
     List<Funcionarios> findAll();
     Funcionarios delete(Long id);
     boolean existsByNumeroDocumento(String numeroDocumento);
+    Optional<Funcionarios> filtrarPorDocumento(String numeroDocumento);
 }

@@ -8,6 +8,7 @@ import dev.matheus.infrastructure.persistence.FornecedoresRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class FornecedoresRepositoryGateway implements FornecedoresGateway {
@@ -61,5 +62,11 @@ public class FornecedoresRepositoryGateway implements FornecedoresGateway {
     @Override
     public boolean existsByNumeroDocumento(String numeroDocumento) {
         return repository.existsByNumeroDocumento(numeroDocumento);
+    }
+
+    @Override
+    public Optional<Fornecedores> filtrarPorDocumento(String numeroDocumento) {
+        return repository.findByNumeroDocumento(numeroDocumento)
+                .map(entityMapper::toDomain);
     }
 }

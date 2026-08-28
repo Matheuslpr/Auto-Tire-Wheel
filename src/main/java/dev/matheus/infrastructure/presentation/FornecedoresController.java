@@ -23,16 +23,18 @@ public class FornecedoresController {
     private final BuscarFornecedoresUseCase buscarFornecedoresUseCase;
     private final AtualizarFornecedoresUseCase atualizarFornecedoresUseCase;
     private final ListarFornecedoresUseCase listarFornecedoresUseCase;
+    private final FiltrarDocumentoFornecedoresUsecase filtrarDocumentoFornecedoresUsecase;
     private final DeletarFornecedoresUseCase deletarFornecedoresUseCase;
     private final FornecedoresCreateMapper fornecedoresCreateMapper;
     private final FornecedoresResponseMapper fornecedoresResponseMapper;
     private final FornecedoresUpdateMapper fornecedoresUpdateMapper;
 
-    public FornecedoresController(CadastrarFornecedoresUseCase cadastrarFornecedoresUseCase, BuscarFornecedoresUseCase buscarFornecedoresUseCase, AtualizarFornecedoresUseCase atualizarFornecedoresUseCase, ListarFornecedoresUseCase listarFornecedoresUseCase, DeletarFornecedoresUseCase deletarFornecedoresUseCase, FornecedoresCreateMapper fornecedoresCreateMapper, FornecedoresResponseMapper fornecedoresResponseMapper, FornecedoresUpdateMapper fornecedoresUpdateMapper) {
+    public FornecedoresController(CadastrarFornecedoresUseCase cadastrarFornecedoresUseCase, BuscarFornecedoresUseCase buscarFornecedoresUseCase, AtualizarFornecedoresUseCase atualizarFornecedoresUseCase, ListarFornecedoresUseCase listarFornecedoresUseCase, FiltrarDocumentoFornecedoresUsecase filtrarDocumentoFornecedoresUsecase, DeletarFornecedoresUseCase deletarFornecedoresUseCase, FornecedoresCreateMapper fornecedoresCreateMapper, FornecedoresResponseMapper fornecedoresResponseMapper, FornecedoresUpdateMapper fornecedoresUpdateMapper) {
         this.cadastrarFornecedoresUseCase = cadastrarFornecedoresUseCase;
         this.buscarFornecedoresUseCase = buscarFornecedoresUseCase;
         this.atualizarFornecedoresUseCase = atualizarFornecedoresUseCase;
         this.listarFornecedoresUseCase = listarFornecedoresUseCase;
+        this.filtrarDocumentoFornecedoresUsecase = filtrarDocumentoFornecedoresUsecase;
         this.deletarFornecedoresUseCase = deletarFornecedoresUseCase;
         this.fornecedoresCreateMapper = fornecedoresCreateMapper;
         this.fornecedoresResponseMapper = fornecedoresResponseMapper;
@@ -50,6 +52,12 @@ public class FornecedoresController {
     @GetMapping("/{id}")
     public ResponseEntity<FornecedoresResponse> findById(@PathVariable Long id){
         Fornecedores fornecedores = buscarFornecedoresUseCase.execute(id);
+        return ResponseEntity.ok(fornecedoresResponseMapper.toDto(fornecedores));
+    }
+
+    @GetMapping("/documento/{numeroDocumento}")
+    public ResponseEntity<FornecedoresResponse> findByDocumento(@PathVariable String numeroDocumento) {
+        Fornecedores fornecedores = filtrarDocumentoFornecedoresUsecase.execute(numeroDocumento);
         return ResponseEntity.ok(fornecedoresResponseMapper.toDto(fornecedores));
     }
 
