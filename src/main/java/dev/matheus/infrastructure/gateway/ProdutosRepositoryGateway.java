@@ -8,6 +8,7 @@ import dev.matheus.infrastructure.persistence.ProdutosRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ProdutosRepositoryGateway implements ProdutosGateway {
@@ -55,5 +56,10 @@ public class ProdutosRepositoryGateway implements ProdutosGateway {
                     return entityMapper.toDomain(entity);
                 })
                 .orElse(null);
+    }
+
+    @Override
+    public Optional<Produtos> filtrarPorCodigo(String codigo) {
+        return repository.findByCodigo(codigo);
     }
 }

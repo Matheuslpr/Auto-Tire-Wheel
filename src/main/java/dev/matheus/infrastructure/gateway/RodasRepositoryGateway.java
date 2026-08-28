@@ -8,6 +8,7 @@ import dev.matheus.infrastructure.persistence.RodasRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class RodasRepositoryGateway implements RodasGateway {
@@ -55,5 +56,10 @@ public class RodasRepositoryGateway implements RodasGateway {
                     return RodasEntityMapper.toDomain(entity);
                 })
                 .orElse(null);
+    }
+
+    @Override
+    public Optional<Rodas> filtrarPorCodigo(String codigo) {
+        return repository.findByCodigo(codigo);
     }
 }

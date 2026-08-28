@@ -23,16 +23,18 @@ public class RodasController {
     private final BuscarRodasUseCase buscarRodasUseCase;
     private final AtualizarRodasUseCase atualizarRodasUseCase;
     private final ListarRodasUseCase listarRodasUseCase;
+    private final FiltrarCodigoRodasUsecase filtrarCodigoRodasUsecase;
     private final DeletarRodasUseCase deletarRodasUseCase;
     private final RodasCreateMapper rodasCreateMapper;
     private final RodasResponseMapper rodasResponseMapper;
     private final RodasUpdateMapper rodasUpdateMapper;
 
-    public RodasController(CadastrarRodasUseCase cadastrarRodasUseCase, BuscarRodasUseCase buscarRodasUseCase, AtualizarRodasUseCase atualizarRodasUseCase, ListarRodasUseCase listarRodasUseCase, DeletarRodasUseCase deletarRodasUseCase, RodasCreateMapper rodasCreateMapper, RodasResponseMapper rodasResponseMapper, RodasUpdateMapper rodasUpdateMapper) {
+    public RodasController(CadastrarRodasUseCase cadastrarRodasUseCase, BuscarRodasUseCase buscarRodasUseCase, AtualizarRodasUseCase atualizarRodasUseCase, ListarRodasUseCase listarRodasUseCase, FiltrarCodigoRodasUsecase filtrarCodigoRodasUsecase, DeletarRodasUseCase deletarRodasUseCase, RodasCreateMapper rodasCreateMapper, RodasResponseMapper rodasResponseMapper, RodasUpdateMapper rodasUpdateMapper) {
         this.cadastrarRodasUseCase = cadastrarRodasUseCase;
         this.buscarRodasUseCase = buscarRodasUseCase;
         this.atualizarRodasUseCase = atualizarRodasUseCase;
         this.listarRodasUseCase = listarRodasUseCase;
+        this.filtrarCodigoRodasUsecase = filtrarCodigoRodasUsecase;
         this.deletarRodasUseCase = deletarRodasUseCase;
         this.rodasCreateMapper = rodasCreateMapper;
         this.rodasResponseMapper = rodasResponseMapper;
@@ -50,6 +52,12 @@ public class RodasController {
     @GetMapping("/{id}")
     public ResponseEntity<RodasResponse> findById(@PathVariable Long id) {
         Rodas rodas = buscarRodasUseCase.execute(id);
+        return ResponseEntity.ok(rodasResponseMapper.toDto(rodas));
+    }
+
+    @GetMapping("/codigo/{codigo}")
+    public ResponseEntity<RodasResponse> findByCodigo(@PathVariable String codigo) {
+        Rodas rodas = filtrarCodigoRodasUsecase.execute(codigo);
         return ResponseEntity.ok(rodasResponseMapper.toDto(rodas));
     }
 

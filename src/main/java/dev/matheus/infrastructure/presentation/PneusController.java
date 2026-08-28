@@ -24,16 +24,18 @@ public class PneusController {
     private final AtualizarPneusUseCase atualizarPneusUseCase;
     private final ListarPneusUseCase listarPneusUseCase;
     private final DeletarPneusUseCase deletarPneusUseCase;
+    private final FiltrarCodigoPneusUsecase filtrarCodigoPneuUsecase;
     private final PneusCreateMapper pneusCreateMapper;
     private final PneusResponseMapper pneusResponseMapper;
     private final PneusUpdateMapper pneusUpdateMapper;
 
-    public PneusController(CadastrarPneusUseCase cadastrarPneusUseCase, BuscarPneusUseCase buscarPneusUseCase, AtualizarPneusUseCase atualizarPneusUseCase, ListarPneusUseCase listarPneusUseCase, DeletarPneusUseCase deletarPneusUseCase, PneusCreateMapper pneusCreateMapper, PneusResponseMapper pneusResponseMapper, PneusUpdateMapper pneusUpdateMapper) {
+    public PneusController(CadastrarPneusUseCase cadastrarPneusUseCase, BuscarPneusUseCase buscarPneusUseCase, AtualizarPneusUseCase atualizarPneusUseCase, ListarPneusUseCase listarPneusUseCase, DeletarPneusUseCase deletarPneusUseCase, FiltrarCodigoPneusUsecase filtrarCodigoPneuUsecase, PneusCreateMapper pneusCreateMapper, PneusResponseMapper pneusResponseMapper, PneusUpdateMapper pneusUpdateMapper) {
         this.cadastrarPneusUseCase = cadastrarPneusUseCase;
         this.buscarPneusUseCase = buscarPneusUseCase;
         this.atualizarPneusUseCase = atualizarPneusUseCase;
         this.listarPneusUseCase = listarPneusUseCase;
         this.deletarPneusUseCase = deletarPneusUseCase;
+        this.filtrarCodigoPneuUsecase = filtrarCodigoPneuUsecase;
         this.pneusCreateMapper = pneusCreateMapper;
         this.pneusResponseMapper = pneusResponseMapper;
         this.pneusUpdateMapper = pneusUpdateMapper;
@@ -50,6 +52,12 @@ public class PneusController {
     @GetMapping("/{id}")
     public ResponseEntity<PneusResponse> findById(@PathVariable Long id){
         Pneus pneus = buscarPneusUseCase.execute(id);
+        return ResponseEntity.ok(pneusResponseMapper.toDto(pneus));
+    }
+
+    @GetMapping("/codigo/{codigo}")
+    public ResponseEntity<PneusResponse> findByCodigo(@PathVariable String codigo) {
+        Pneus pneus = filtrarCodigoPneuUsecase.execute(codigo);
         return ResponseEntity.ok(pneusResponseMapper.toDto(pneus));
     }
 

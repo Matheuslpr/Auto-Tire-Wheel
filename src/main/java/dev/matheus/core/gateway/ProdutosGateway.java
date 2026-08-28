@@ -3,6 +3,7 @@ package dev.matheus.core.gateway;
 import dev.matheus.core.entities.Produtos;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ProdutosGateway {
 
@@ -11,5 +12,6 @@ public interface ProdutosGateway {
     Produtos replace(Produtos produtos);
     List<Produtos> findAll();
     Produtos delete(Long id);
+    Optional<Produtos> filtrarPorCodigo(String codigo);
 
 }

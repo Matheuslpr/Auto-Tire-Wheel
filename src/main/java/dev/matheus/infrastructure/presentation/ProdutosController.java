@@ -23,16 +23,18 @@ public class ProdutosController {
     private final BuscarProdutosUseCase buscarProdutosUseCase;
     private final AtualizarProdutosUseCase atualizarProdutosUseCase;
     private final ListarProdutosUseCase listarProdutosUseCase;
+    private final FiltrarCodigoProdutosUsecase filtrarCodigoProdutoUsecase;
     private final DeletarProdutosUseCase deletarProdutosUseCase;
     private final ProdutosCreateMapper produtosCreateMapper;
     private final ProdutosResponseMapper produtosResponseMapper;
     private final ProdutosUpdateMapper produtosUpdateMapper;
 
-    public ProdutosController(CadastrarProdutosUseCase cadastrarProdutosUseCase, BuscarProdutosUseCase buscarProdutosUseCase, AtualizarProdutosUseCase atualizarProdutosUseCase, ListarProdutosUseCase listarProdutosUseCase, DeletarProdutosUseCase deletarProdutosUseCase, ProdutosCreateMapper produtosCreateMapper, ProdutosResponseMapper produtosResponseMapper, ProdutosUpdateMapper produtosUpdateMapper) {
+    public ProdutosController(CadastrarProdutosUseCase cadastrarProdutosUseCase, BuscarProdutosUseCase buscarProdutosUseCase, AtualizarProdutosUseCase atualizarProdutosUseCase, ListarProdutosUseCase listarProdutosUseCase, FiltrarCodigoProdutosUsecase filtrarCodigoProdutoUsecase, DeletarProdutosUseCase deletarProdutosUseCase, ProdutosCreateMapper produtosCreateMapper, ProdutosResponseMapper produtosResponseMapper, ProdutosUpdateMapper produtosUpdateMapper) {
         this.cadastrarProdutosUseCase = cadastrarProdutosUseCase;
         this.buscarProdutosUseCase = buscarProdutosUseCase;
         this.atualizarProdutosUseCase = atualizarProdutosUseCase;
         this.listarProdutosUseCase = listarProdutosUseCase;
+        this.filtrarCodigoProdutoUsecase = filtrarCodigoProdutoUsecase;
         this.deletarProdutosUseCase = deletarProdutosUseCase;
         this.produtosCreateMapper = produtosCreateMapper;
         this.produtosResponseMapper = produtosResponseMapper;
@@ -53,6 +55,11 @@ public class ProdutosController {
         return ResponseEntity.ok(produtosResponseMapper.toDto(produtos));
     }
 
+    @GetMapping("/codigo/{codigo}")
+    public ResponseEntity<ProdutosResponse> findByCodigo(@PathVariable String codigo) {
+        Produtos produto = filtrarCodigoProdutoUsecase.execute(codigo);
+        return ResponseEntity.ok(produtosResponseMapper.toDto(produto));
+    }
     @PostMapping
     public ResponseEntity<Map<String, Object>> create(@Valid @RequestBody ProdutosCreateRequest request){
         Produtos create = cadastrarProdutosUseCase.execute(produtosCreateMapper.toEntity(request));

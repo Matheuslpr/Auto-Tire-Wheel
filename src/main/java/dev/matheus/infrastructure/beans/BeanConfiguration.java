@@ -177,6 +177,11 @@ public class BeanConfiguration {
         return new DeletarPneusUseCaseImpl(pneusGateway);
     }
 
+    @Bean
+    public FiltrarCodigoPneusUsecase filtrarCodigoPneuUsecase(PneusGateway pneusGateway){
+        return new FiltrarCodigoPneusUsecaseImpl(pneusGateway);
+    }
+
     // Beans for Produtos use case
 
     @Bean
@@ -187,6 +192,11 @@ public class BeanConfiguration {
     @Bean
     public BuscarProdutosUseCase buscarProdutosUseCase(ProdutosGateway produtosGateway){
         return new BuscarProdutosUseCaseImpl(produtosGateway);
+    }
+
+    @Bean
+    public FiltrarCodigoProdutosUsecase filtrarCodigoProdutoUsecase(ProdutosGateway produtosGateway){
+        return new FiltrarCodigoProdutosUsecaseImpl(produtosGateway);
     }
 
     @Bean
@@ -224,6 +234,11 @@ public class BeanConfiguration {
     @Bean
     public ListarRodasUseCase listarRodasUseCase(RodasGateway rodasGateway){
         return new ListarRodasUseCaseImpl(rodasGateway);
+    }
+
+    @Bean
+    public FiltrarCodigoRodasUsecase filtrarCodigoRodasUsecase(RodasGateway rodasGateway){
+        return new FiltrarCodigoRodasUsecaseImpl(rodasGateway);
     }
 
     @Bean

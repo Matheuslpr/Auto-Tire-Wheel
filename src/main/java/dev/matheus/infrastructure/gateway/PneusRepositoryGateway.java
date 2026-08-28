@@ -8,6 +8,7 @@ import dev.matheus.infrastructure.persistence.PneusRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class PneusRepositoryGateway implements PneusGateway {
@@ -56,4 +57,10 @@ public class PneusRepositoryGateway implements PneusGateway {
                 })
                 .orElse(null);
     }
+
+    @Override
+    public Optional<Pneus> filtrarPorCodigo(String codigo) {
+        return repository.findByCodigo(codigo);
+    }
+
 }
