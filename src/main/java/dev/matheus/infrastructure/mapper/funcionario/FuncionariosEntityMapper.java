@@ -23,6 +23,7 @@ public class FuncionariosEntityMapper {
         entity.setEstado(funcionarios.estado());
         entity.setCep(funcionarios.cep());
         entity.setCargo(funcionarios.cargo());
+        entity.setRegistro(funcionarios.registro());
         entity.setSalario(funcionarios.salario());
         entity.setDataAdmissao(funcionarios.dataAdmissao());
         entity.setDataDesligamento(funcionarios.dataDesligamento());
@@ -47,7 +48,8 @@ public class FuncionariosEntityMapper {
                 funcionarios.getCargo(),
                 funcionarios.getSalario(),
                 funcionarios.getDataAdmissao(),
-                funcionarios.getDataDesligamento()
-        );
+                funcionarios.getDataDesligamento(),
+                funcionarios.getRegistro()
+                );
     }
 }

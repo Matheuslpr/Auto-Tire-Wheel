@@ -21,6 +21,7 @@ public class FuncionariosUpdateMapper {
                 funcionarios.estado(),
                 funcionarios.cep(),
                 funcionarios.cargo(),
+                funcionarios.registro(),
                 funcionarios.salario()
         );
     }
@@ -42,7 +43,9 @@ public class FuncionariosUpdateMapper {
                 request.cargo() != null ? request.cargo() : funcionariosExistente.cargo(),
                 request.salario() != null ? request.salario() : funcionariosExistente.salario(),
                 funcionariosExistente.dataAdmissao(),
-                funcionariosExistente.dataDesligamento()
+                funcionariosExistente.dataDesligamento(),
+                request.registro() != null ? request.registro() : funcionariosExistente.registro()
+
         );
     }
 
@@ -63,7 +66,8 @@ public class FuncionariosUpdateMapper {
                 request.cargo(),
                 request.salario(),
                 java.time.LocalDateTime.now(),
-                null
+                null,
+                request.registro()
         );
     }
 }

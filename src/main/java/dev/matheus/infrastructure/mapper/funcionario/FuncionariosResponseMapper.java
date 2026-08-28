@@ -22,6 +22,7 @@ public class FuncionariosResponseMapper {
                 funcionarios.estado(),
                 funcionarios.cep(),
                 funcionarios.cargo(),
+                funcionarios.registro(),
                 funcionarios.salario(),
                 funcionarios.dataAdmissao(),
                 funcionarios.dataDesligamento()
@@ -45,7 +46,8 @@ public class FuncionariosResponseMapper {
                 response.cargo(),
                 response.salario(),
                 response.dataAdmissao(),
-                response.dataDesligamento()
+                response.dataDesligamento(),
+                response.registro()
         );
     }
 }

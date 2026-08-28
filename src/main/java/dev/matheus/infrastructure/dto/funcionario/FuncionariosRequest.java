@@ -47,11 +47,13 @@ public record FuncionariosRequest(
         @NotBlank(message = "cargo é obrigatório")
         String cargo,
 
+        @NotBlank(message = "registro é obrigatório")
+        String registro,
+
         @NotNull(message = "salario é obrigatório")
         @DecimalMin(value = "0.0", inclusive = false, message = "salario deve ser maior que zero")
         BigDecimal salario
-
-) {
+        ) {
 
 }
 

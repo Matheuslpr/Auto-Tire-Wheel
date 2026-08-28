@@ -23,6 +23,7 @@ public class FuncionariosCreateMapper {
                 funcionarios.estado(),
                 funcionarios.cep(),
                 funcionarios.cargo(),
+                funcionarios.registro(),
                 funcionarios.salario()
         );
     }
@@ -44,7 +45,8 @@ public class FuncionariosCreateMapper {
                 create.cargo(),
                 create.salario(),
                 LocalDateTime.now(),
-                null
+                null,
+                create.registro()
         );
     }
 }

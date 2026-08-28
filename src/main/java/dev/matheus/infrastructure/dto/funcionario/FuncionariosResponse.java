@@ -19,6 +19,7 @@ public record FuncionariosResponse(
         String estado,
         String cep,
         String cargo,
+        String registro,
         BigDecimal salario,
         LocalDateTime dataAdmissao,
         LocalDateTime dataDesligamento
