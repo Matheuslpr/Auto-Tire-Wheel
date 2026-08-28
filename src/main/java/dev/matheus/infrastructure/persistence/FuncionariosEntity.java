@@ -40,6 +40,9 @@ public class FuncionariosEntity {
     @Column(name = "data_desligamento")
     private LocalDateTime dataDesligamento;
 
+    @Column(name = "registro")
+    private String registro;
+
     @PrePersist
     public void prePersist() {
         if (dataAdmissao == null) {
@@ -47,8 +50,15 @@ public class FuncionariosEntity {
         }
     }
 
-
     //gets and sets
+
+    public String getRegistro() {
+        return registro;
+    }
+
+    public void setRegistro(String registro) {
+        this.registro = registro;
+    }
 
     public Long getId() {
         return id;
