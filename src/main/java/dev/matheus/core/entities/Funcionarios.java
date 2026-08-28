@@ -21,6 +21,7 @@ public record Funcionarios(
         String cargo,
         BigDecimal salario,
         LocalDateTime dataAdmissao,
-        LocalDateTime dataDesligamento
+        LocalDateTime dataDesligamento,
+        String registro
 ) {
 }
