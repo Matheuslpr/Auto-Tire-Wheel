@@ -33,6 +33,11 @@ public class BeanConfiguration {
     }
 
     @Bean
+    public FiltrarDocumentoClientesUsecase filtrarDocumentoClientesUsecase(ClientesGateway clientesGateway){
+        return new FiltrarDocumentoClientesUsecaseImpl(clientesGateway);
+    }
+
+    @Bean
     public ListarClientesUseCase listarClientesUseCase(ClientesGateway clientesGateway){
         return new ListarClientesUseCaseImpl(clientesGateway);
     }
@@ -57,6 +62,11 @@ public class BeanConfiguration {
     @Bean
     public BuscarFornecedoresUseCase buscarFornecedoresUseCase(FornecedoresGateway fornecedoresGateway){
         return new BuscarFornecedoresUseCaseImpl(fornecedoresGateway);
+    }
+
+    @Bean
+    public FiltrarDocumentoFornecedoresUsecase filtrarDocumentoFornecedoresUsecase(FornecedoresGateway fornecedoresGateway){
+        return new FiltrarDocumentoFornecedoresUsecaseImpl(fornecedoresGateway);
     }
 
     @Bean
@@ -89,6 +99,16 @@ public class BeanConfiguration {
     @Bean
     public ListarFuncionariosUseCase listarFuncionariosUseCase(FuncionariosGateway funcionariosGateway) {
         return new ListarFuncionariosUseCaseImpl(funcionariosGateway);
+    }
+
+    @Bean
+    public FiltrarDocumentoFuncionariosUsecase filtrarDocumentoFuncionariosUsecase(FuncionariosGateway funcionariosGateway){
+        return new FiltrarDocumentoFuncionariosUsecaseImpl(funcionariosGateway);
+    }
+
+    @Bean
+    public FiltrarRegistroFuncionariosUsecase filtrarRegistroFuncionariosUsecase(FuncionariosGateway funcionariosGateway){
+        return new FiltrarRegistroFuncionariosUsecaseImpl(funcionariosGateway);
     }
 
     @Bean
