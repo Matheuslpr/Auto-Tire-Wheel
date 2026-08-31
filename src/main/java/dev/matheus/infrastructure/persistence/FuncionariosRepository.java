@@ -9,4 +9,8 @@ public interface FuncionariosRepository extends JpaRepository<FuncionariosEntity
     boolean existsByNumeroDocumento(String numeroDocumento);
 
     Optional<FuncionariosEntity> findByNumeroDocumento(String numeroDocumento);
+
+    Optional<FuncionariosEntity> findByRegistro(String registro);
+
+    boolean existsByRegistro(String registro);
 }

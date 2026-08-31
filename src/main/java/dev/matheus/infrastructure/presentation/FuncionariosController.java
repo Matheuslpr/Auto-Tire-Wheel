@@ -24,17 +24,19 @@ public class FuncionariosController {
     private final AtualizarFuncionariosUseCase atualizarFuncionariosUseCase;
     private final ListarFuncionariosUseCase listarFuncionariosUseCase;
     private final FiltrarDocumentoFuncionariosUsecase filtrarDocumentoFuncionariosUsecase;
+    private final FiltrarRegistroFuncionariosUsecase filtrarRegistroFuncionariosUsecase;
     private final DeletarFuncionariosUseCase deletarFuncionariosUseCase;
     private final FuncionariosCreateMapper funcionariosCreateMapper;
     private final FuncionariosResponseMapper funcionariosResponseMapper;
     private final FuncionariosUpdateMapper funcionariosUpdateMapper;
 
-    public FuncionariosController(CadastrarFuncionariosUseCase cadastrarFuncionariosUseCase, BuscarFuncionariosUseCase buscarFuncionariosUseCase, AtualizarFuncionariosUseCase atualizarFuncionariosUseCase, ListarFuncionariosUseCase listarFuncionariosUseCase, FiltrarDocumentoFuncionariosUsecase filtrarDocumentoFuncionariosUsecase, DeletarFuncionariosUseCase deletarFuncionariosUseCase, FuncionariosCreateMapper funcionariosCreateMapper, FuncionariosResponseMapper funcionariosResponseMapper, FuncionariosUpdateMapper funcionariosUpdateMapper) {
+    public FuncionariosController(CadastrarFuncionariosUseCase cadastrarFuncionariosUseCase, BuscarFuncionariosUseCase buscarFuncionariosUseCase, AtualizarFuncionariosUseCase atualizarFuncionariosUseCase, ListarFuncionariosUseCase listarFuncionariosUseCase, FiltrarDocumentoFuncionariosUsecase filtrarDocumentoFuncionariosUsecase, FiltrarRegistroFuncionariosUsecase filtrarRegistroFuncionariosUsecase, DeletarFuncionariosUseCase deletarFuncionariosUseCase, FuncionariosCreateMapper funcionariosCreateMapper, FuncionariosResponseMapper funcionariosResponseMapper, FuncionariosUpdateMapper funcionariosUpdateMapper) {
         this.cadastrarFuncionariosUseCase = cadastrarFuncionariosUseCase;
         this.buscarFuncionariosUseCase = buscarFuncionariosUseCase;
         this.atualizarFuncionariosUseCase = atualizarFuncionariosUseCase;
         this.listarFuncionariosUseCase = listarFuncionariosUseCase;
         this.filtrarDocumentoFuncionariosUsecase = filtrarDocumentoFuncionariosUsecase;
+        this.filtrarRegistroFuncionariosUsecase = filtrarRegistroFuncionariosUsecase;
         this.deletarFuncionariosUseCase = deletarFuncionariosUseCase;
         this.funcionariosCreateMapper = funcionariosCreateMapper;
         this.funcionariosResponseMapper = funcionariosResponseMapper;
@@ -59,6 +61,12 @@ public class FuncionariosController {
     public ResponseEntity<FuncionariosResponse> findByDocumento(@PathVariable String numeroDocumento) {
         Funcionarios funcionarios = filtrarDocumentoFuncionariosUsecase.execute(numeroDocumento);
         return ResponseEntity.ok(funcionariosResponseMapper.toDto(funcionarios));
+    }
+
+    @GetMapping("/registro/{registro}")
+    public ResponseEntity<FuncionariosResponse> findByRegistro(@PathVariable String registro) {
+        Funcionarios funcionario = filtrarRegistroFuncionariosUsecase.execute(registro);
+        return ResponseEntity.ok(funcionariosResponseMapper.toDto(funcionario));
     }
 
     @PostMapping

@@ -14,4 +14,5 @@ public interface FuncionariosGateway {
     Funcionarios delete(Long id);
     boolean existsByNumeroDocumento(String numeroDocumento);
     Optional<Funcionarios> filtrarPorDocumento(String numeroDocumento);
+    Optional<Funcionarios> filtrarPorRegistro(String registro);
 }

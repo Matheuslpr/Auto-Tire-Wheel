@@ -70,4 +70,10 @@ public class FuncionariosRepositoryGateway implements FuncionariosGateway {
         return repository.findByNumeroDocumento(numeroDocumento)
                 .map(entityMapper::toDomain);
     }
+
+    @Override
+    public Optional<Funcionarios> filtrarPorRegistro(String registro) {
+        return repository.findByRegistro(registro)
+                .map(entityMapper::toDomain);
+    }
 }
