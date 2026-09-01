@@ -6,7 +6,7 @@ import dev.matheus.infrastructure.exception.ResourceNotFoundException;
 
 public class FiltrarCodigoPneusUsecaseImpl implements FiltrarCodigoPneusUsecase {
 
-    public final PneusGateway gateway;
+    private final PneusGateway gateway;
 
     public FiltrarCodigoPneusUsecaseImpl(PneusGateway gateway) {
         this.gateway = gateway;

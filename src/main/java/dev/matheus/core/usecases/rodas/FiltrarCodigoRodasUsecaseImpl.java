@@ -6,7 +6,7 @@ import dev.matheus.infrastructure.exception.ResourceNotFoundException;
 
 public class FiltrarCodigoRodasUsecaseImpl implements FiltrarCodigoRodasUsecase {
 
-    public final RodasGateway gateway;
+    private final RodasGateway gateway;
 
     public FiltrarCodigoRodasUsecaseImpl(RodasGateway gateway) {
         this.gateway = gateway;

@@ -6,7 +6,7 @@ import dev.matheus.infrastructure.exception.ResourceNotFoundException;
 
 public class FiltrarDocumentoFornecedoresUsecaseImpl implements FiltrarDocumentoFornecedoresUsecase {
 
-    public final FornecedoresGateway gateway;
+    private final FornecedoresGateway gateway;
 
     public FiltrarDocumentoFornecedoresUsecaseImpl(FornecedoresGateway gateway) {
         this.gateway = gateway;
