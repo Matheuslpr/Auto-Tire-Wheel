@@ -33,7 +33,8 @@ public class AtualizarFuncionariosUseCaseImpl implements AtualizarFuncionariosUs
                 funcionarios.cargo(),
                 funcionarios.salario(),
                 funcionarios.dataAdmissao(),
-                funcionarios.dataDesligamento()
+                funcionarios.dataDesligamento(),
+                funcionarios.registro()
         ));
     }
 }
