@@ -60,6 +60,12 @@ public class ProdutosRepositoryGateway implements ProdutosGateway {
 
     @Override
     public Optional<Produtos> filtrarPorCodigo(String codigo) {
-        return repository.findByCodigo(codigo);
+        return repository.findByCodigo(codigo)
+                .map(entityMapper::toDomain);
+    }
+
+    @Override
+    public boolean existsByCodigo(String codigo) {
+        return repository.existsByCodigo(codigo);
     }
 }

@@ -60,6 +60,12 @@ public class RodasRepositoryGateway implements RodasGateway {
 
     @Override
     public Optional<Rodas> filtrarPorCodigo(String codigo) {
-        return repository.findByCodigo(codigo);
+        return repository.findByCodigo(codigo)
+                .map(RodasEntityMapper::toDomain);
+    }
+
+    @Override
+    public boolean existsByCodigo(String codigo) {
+        return repository.existsByCodigo(codigo);
     }
 }
