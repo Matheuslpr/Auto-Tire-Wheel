@@ -13,5 +13,6 @@ public interface ProdutosGateway {
     List<Produtos> findAll();
     Produtos delete(Long id);
     Optional<Produtos> filtrarPorCodigo(String codigo);
+    boolean existsByCodigo(String codigo);
 
 }

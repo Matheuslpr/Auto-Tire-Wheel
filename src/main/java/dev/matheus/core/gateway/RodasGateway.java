@@ -13,5 +13,6 @@ public interface RodasGateway {
     List<Rodas> findAll();
     Rodas delete(Long id);
     Optional<Rodas> filtrarPorCodigo(String codigo);
+    boolean existsByCodigo(String codigo);
 
 }

@@ -13,5 +13,6 @@ public interface PneusGateway {
     List<Pneus> findAll();
     Pneus delete(Long id);
     Optional<Pneus> filtrarPorCodigo(String codigo);
+    boolean existsByCodigo(String codigo);
 
 }
