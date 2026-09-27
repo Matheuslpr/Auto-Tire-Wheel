@@ -22,16 +22,18 @@ public class ItensVendaController {
     private final CadastrarItensVendaUseCase cadastrarItensVendaUseCase;
     private final BuscarItensVendaUseCase buscarItensVendaUseCase;
     private final ListarItensVendaUseCase listarItensVendaUseCase;
+    private final ListarItensVendaPorVendaUseCase listarItensVendaPorVendaUseCase;
     private final AtualizarItensVendaUseCase atualizarItensVendaUseCase;
     private final DeletarItensVendaUseCase deletarItensVendaUseCase;
     private final ItensVendaCreateMapper itensVendaCreateMapper;
     private final ItensVendaResponseMapper itensVendaResponseMapper;
     private final ItensVendaUpdateMapper itensVendaUpdateMapper;
 
-    public ItensVendaController(CadastrarItensVendaUseCase cadastrarItensVendaUseCase, BuscarItensVendaUseCase buscarItensVendaUseCase, ListarItensVendaUseCase listarItensVendaUseCase, AtualizarItensVendaUseCase atualizarItensVendaUseCase, DeletarItensVendaUseCase deletarItensVendaUseCase, ItensVendaCreateMapper itensVendaCreateMapper, ItensVendaResponseMapper itensVendaResponseMapper, ItensVendaUpdateMapper itensVendaUpdateMapper) {
+    public ItensVendaController(CadastrarItensVendaUseCase cadastrarItensVendaUseCase, BuscarItensVendaUseCase buscarItensVendaUseCase, ListarItensVendaUseCase listarItensVendaUseCase, ListarItensVendaPorVendaUseCase listarItensVendaPorVendaUseCase, AtualizarItensVendaUseCase atualizarItensVendaUseCase, DeletarItensVendaUseCase deletarItensVendaUseCase, ItensVendaCreateMapper itensVendaCreateMapper, ItensVendaResponseMapper itensVendaResponseMapper, ItensVendaUpdateMapper itensVendaUpdateMapper) {
         this.cadastrarItensVendaUseCase = cadastrarItensVendaUseCase;
         this.buscarItensVendaUseCase = buscarItensVendaUseCase;
         this.listarItensVendaUseCase = listarItensVendaUseCase;
+        this.listarItensVendaPorVendaUseCase = listarItensVendaPorVendaUseCase;
         this.atualizarItensVendaUseCase = atualizarItensVendaUseCase;
         this.deletarItensVendaUseCase = deletarItensVendaUseCase;
         this.itensVendaCreateMapper = itensVendaCreateMapper;
@@ -44,6 +46,14 @@ public class ItensVendaController {
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem" , "Itens listados com sucesso");
         response.put("Itens" , listarItensVendaUseCase.execute().stream().map(itensVendaResponseMapper::toDto).toList());
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/venda/{vendaId}")
+    public ResponseEntity<Map<String, Object>> findByVenda(@PathVariable Long vendaId){
+        Map<String, Object> response = new HashMap<>();
+        response.put("mensagem" , "Itens da venda listados com sucesso");
+        response.put("Itens" , listarItensVendaPorVendaUseCase.execute(vendaId).stream().map(itensVendaResponseMapper::toDto).toList());
         return ResponseEntity.ok(response);
     }
 
@@ -82,5 +92,4 @@ public class ItensVendaController {
         response.put("item" , itensVendaResponseMapper.toDto(deleted));
         return ResponseEntity.ok(response);
     }
-
 }

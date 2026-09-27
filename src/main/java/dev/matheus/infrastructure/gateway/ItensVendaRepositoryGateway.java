@@ -1,6 +1,7 @@
 package dev.matheus.infrastructure.gateway;
 
 import dev.matheus.core.entities.ItensVenda;
+import dev.matheus.core.enuns.TipoItemVenda;
 import dev.matheus.core.gateway.ItensVendaGateway;
 import dev.matheus.infrastructure.mapper.itemVenda.ItensVendaEntityMapper;
 import dev.matheus.infrastructure.persistence.ItensVendaEntity;
@@ -56,5 +57,18 @@ public class ItensVendaRepositoryGateway implements ItensVendaGateway {
                     return entityMapper.toDomain(entity);
                 })
                 .orElse(null);
+    }
+
+    @Override
+    public boolean existsDuplicado(Long vendaId, TipoItemVenda tipoItem, Long itemId) {
+        return repository.existsByVendaIdAndTipoItemAndItemId(vendaId, tipoItem, itemId);
+    }
+
+    @Override
+    public List<ItensVenda> findByVendaId(Long vendaId) {
+        return repository.findByVendaId(vendaId)
+                .stream()
+                .map(entityMapper::toDomain)
+                .toList();
     }
 }

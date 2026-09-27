@@ -25,17 +25,19 @@ public class VendasController {
     private final ListarVendasUseCase listarVendasUseCase;
     private final ConcluirVendasUseCase concluirVendasUseCase;
     private final CancelarVendasUseCase cancelarVendasUseCase;
+    private final DeletarVendasUseCase deletarVendasUseCase;
     private final VendasCreateMapper vendasCreateMapper;
     private final VendasResponseMapper vendasResponseMapper;
     private final VendasUpdateMapper vendasUpdateMapper;
 
-    public VendasController(CriarVendasUseCase criarVendasUseCase, BuscarVendasUseCase buscarVendasUseCase, AtualizarVendasUseCase atualizarVendasUseCase, ListarVendasUseCase listarVendasUseCase, ConcluirVendasUseCase concluirVendasUseCase, CancelarVendasUseCase cancelarVendasUseCase, VendasCreateMapper vendasCreateMapper, VendasResponseMapper vendasResponseMapper, VendasUpdateMapper vendasUpdateMapper) {
+    public VendasController(CriarVendasUseCase criarVendasUseCase, BuscarVendasUseCase buscarVendasUseCase, AtualizarVendasUseCase atualizarVendasUseCase, ListarVendasUseCase listarVendasUseCase, ConcluirVendasUseCase concluirVendasUseCase, CancelarVendasUseCase cancelarVendasUseCase, DeletarVendasUseCase deletarVendasUseCase, VendasCreateMapper vendasCreateMapper, VendasResponseMapper vendasResponseMapper, VendasUpdateMapper vendasUpdateMapper) {
         this.criarVendasUseCase = criarVendasUseCase;
         this.buscarVendasUseCase = buscarVendasUseCase;
         this.atualizarVendasUseCase = atualizarVendasUseCase;
         this.listarVendasUseCase = listarVendasUseCase;
         this.concluirVendasUseCase = concluirVendasUseCase;
         this.cancelarVendasUseCase = cancelarVendasUseCase;
+        this.deletarVendasUseCase = deletarVendasUseCase;
         this.vendasCreateMapper = vendasCreateMapper;
         this.vendasResponseMapper = vendasResponseMapper;
         this.vendasUpdateMapper = vendasUpdateMapper;
@@ -89,6 +91,15 @@ public class VendasController {
         Map<String, Object> response = new HashMap<>();
         response.put("mensagem", "Venda cancelada com sucesso");
         response.put("Venda", vendasResponseMapper.toDto(cancelada));
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Map<String, Object>> delete(@PathVariable Long id){
+        Vendas deletada = deletarVendasUseCase.execute(id);
+        Map<String, Object> response = new HashMap<>();
+        response.put("mensagem", "Venda deletada com sucesso");
+        response.put("Venda", vendasResponseMapper.toDto(deletada));
         return ResponseEntity.ok(response);
     }
 }

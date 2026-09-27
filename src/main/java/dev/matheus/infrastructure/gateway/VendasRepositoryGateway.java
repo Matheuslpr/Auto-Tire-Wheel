@@ -46,4 +46,14 @@ public class VendasRepositoryGateway implements VendasGateway {
                 .map(VendasEntityMapper::toDomain)
                 .toList();
     }
+
+    @Override
+    public Vendas delete(Long id) {
+        return repository.findById(id)
+                .map(entity -> {
+                    repository.delete(entity);
+                    return VendasEntityMapper.toDomain(entity);
+                })
+                .orElse(null);
+    }
 }

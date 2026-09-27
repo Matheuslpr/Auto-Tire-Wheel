@@ -10,5 +10,6 @@ public interface VendasGateway {
     Vendas findById(Long id);
     Vendas replace(Vendas vendas);
     List<Vendas> findAll();
+    Vendas delete(Long id);
 
 }

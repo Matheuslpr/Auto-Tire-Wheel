@@ -119,13 +119,18 @@ public class BeanConfiguration {
     // Beans for ItensVenda use case
 
     @Bean
-    public AtualizarItensVendaUseCase atualizarItensVendaUseCase(ItensVendaGateway itensVendaGateway){
-        return new AtualizarItensVendaUseCaseImpl(itensVendaGateway);
+    public ItensVendaEstoqueService itensVendaEstoqueService(ProdutosGateway produtosGateway, PneusGateway pneusGateway, RodasGateway rodasGateway){
+        return new ItensVendaEstoqueService(produtosGateway, pneusGateway, rodasGateway);
     }
 
     @Bean
-    public CadastrarItensVendaUseCase cadastrarItensVendaUseCase(ItensVendaGateway itensVendaGateway){
-        return new CadastrarItensVendaUseCaseImpl(itensVendaGateway);
+    public AtualizarItensVendaUseCase atualizarItensVendaUseCase(ItensVendaGateway itensVendaGateway, VendasGateway vendasGateway, ItensVendaEstoqueService itensVendaEstoqueService){
+        return new AtualizarItensVendaUseCaseImpl(itensVendaGateway, vendasGateway, itensVendaEstoqueService);
+    }
+
+    @Bean
+    public CadastrarItensVendaUseCase cadastrarItensVendaUseCase(ItensVendaGateway itensVendaGateway, VendasGateway vendasGateway, ItensVendaEstoqueService itensVendaEstoqueService){
+        return new CadastrarItensVendaUseCaseImpl(itensVendaGateway, vendasGateway, itensVendaEstoqueService);
     }
 
     @Bean
@@ -139,9 +144,15 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public DeletarItensVendaUseCase deletarItensVendaUseCase(ItensVendaGateway itensVendaGateway){
-        return new DeletarItensVendaUseCaseImpl(itensVendaGateway);
+    public ListarItensVendaPorVendaUseCase listarItensVendaPorVendaUseCase(ItensVendaGateway itensVendaGateway){
+        return new ListarItensVendaPorVendaUseCaseImpl(itensVendaGateway);
     }
+
+    @Bean
+    public DeletarItensVendaUseCase deletarItensVendaUseCase(ItensVendaGateway itensVendaGateway, VendasGateway vendasGateway, ItensVendaEstoqueService itensVendaEstoqueService){
+        return new DeletarItensVendaUseCaseImpl(itensVendaGateway, vendasGateway, itensVendaEstoqueService);
+    }
+
 
     // Beans for Marca use case
 
@@ -296,5 +307,10 @@ public class BeanConfiguration {
     @Bean
     public CancelarVendasUseCase cancelarVendasUseCase(VendasGateway vendasGateway){
         return new CancelarVendasUseCaseImpl(vendasGateway);
+    }
+
+    @Bean
+    public DeletarVendasUseCase deletarVendasUseCase(VendasGateway vendasGateway, ItensVendaGateway itensVendaGateway){
+        return new DeletarVendasUseCaseImpl(vendasGateway, itensVendaGateway);
     }
 }
