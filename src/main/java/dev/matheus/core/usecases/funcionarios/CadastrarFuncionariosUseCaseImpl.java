@@ -17,6 +17,9 @@ public class CadastrarFuncionariosUseCaseImpl implements CadastrarFuncionariosUs
         if (gateway.existsByNumeroDocumento(funcionarios.numeroDocumento())) {
             throw new DuplicateException("Já existe um funcionário cadastrado com este número de documento");
         }
+        if (funcionarios.registro() != null && gateway.filtrarPorRegistro(funcionarios.registro()).isPresent()) {
+            throw new DuplicateException("Já existe um funcionário cadastrado com este registro");
+        }
         return gateway.create(funcionarios);
     }
 }
