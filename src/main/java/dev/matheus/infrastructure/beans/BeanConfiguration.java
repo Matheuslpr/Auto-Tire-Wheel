@@ -305,8 +305,8 @@ public class BeanConfiguration {
     }
 
     @Bean
-    public CancelarVendasUseCase cancelarVendasUseCase(VendasGateway vendasGateway){
-        return new CancelarVendasUseCaseImpl(vendasGateway);
+    public CancelarVendasUseCase cancelarVendasUseCase(VendasGateway vendasGateway, ItensVendaGateway itensVendaGateway, ItensVendaEstoqueService itensVendaEstoqueService){
+        return new CancelarVendasUseCaseImpl(vendasGateway, itensVendaGateway, itensVendaEstoqueService);
     }
 
     @Bean
