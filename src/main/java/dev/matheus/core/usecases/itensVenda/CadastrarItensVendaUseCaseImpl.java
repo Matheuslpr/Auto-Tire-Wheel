@@ -9,6 +9,7 @@ import dev.matheus.infrastructure.exception.DuplicateException;
 import dev.matheus.infrastructure.exception.ResourceNotFoundException;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class CadastrarItensVendaUseCaseImpl implements CadastrarItensVendaUseCase{
@@ -40,7 +41,18 @@ public class CadastrarItensVendaUseCaseImpl implements CadastrarItensVendaUseCas
         estoqueService.validarExistencia(itensVenda.tipoItem(), itensVenda.itemId());
         estoqueService.debitarEstoque(itensVenda.tipoItem(), itensVenda.itemId(), itensVenda.quantidade());
 
-        ItensVenda criado = gateway.create(itensVenda);
+        BigDecimal subtotalCalculado = itensVenda.precoUnitario()
+                .multiply(BigDecimal.valueOf(itensVenda.quantidade()));
+
+        ItensVenda criado = gateway.create(new ItensVenda(
+                itensVenda.id(),
+                itensVenda.vendaId(),
+                itensVenda.tipoItem(),
+                itensVenda.itemId(),
+                itensVenda.quantidade(),
+                itensVenda.precoUnitario(),
+                subtotalCalculado
+        ));
 
         vendasGateway.replace(new Vendas(
                 venda.id(),
@@ -48,7 +60,7 @@ public class CadastrarItensVendaUseCaseImpl implements CadastrarItensVendaUseCas
                 venda.funcionarioId(),
                 venda.dataVenda(),
                 venda.formaPagamento(),
-                venda.valorTotal().add(itensVenda.subtotal()),
+                venda.valorTotal().add(subtotalCalculado),
                 venda.status(),
                 venda.dataCadastro(),
                 LocalDateTime.now()
@@ -56,5 +68,4 @@ public class CadastrarItensVendaUseCaseImpl implements CadastrarItensVendaUseCas
 
         return criado;
     }
-
 }
