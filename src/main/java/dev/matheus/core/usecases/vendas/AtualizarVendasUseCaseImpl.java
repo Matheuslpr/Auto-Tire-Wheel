@@ -28,7 +28,7 @@ public class AtualizarVendasUseCaseImpl implements AtualizarVendasUseCase {
                 vendas.funcionarioId(),
                 vendas.dataVenda(),
                 vendas.formaPagamento(),
-                vendas.valorTotal(),
+                existente.valorTotal(),
                 existente.status(),
                 existente.dataCadastro(),
                 vendas.dataAtualizacao()
